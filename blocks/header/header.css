@@ -2,12 +2,10 @@
   box-sizing: border-box;
   min-height: 74px;
 
-  width: 100%;
-
   border-bottom: 1px solid hsla(0, 0%, 33%, 0.7);
 }
 
-@media screen and (max-width: 710px) {
+@media screen and (max-width: 740px) {
   .header {
     padding-left: 27px;
     min-height: 56px;

@@ -6,14 +6,16 @@
   line-height: 1.14;
 
   margin: 0 18px 0 0;
+
+  max-width: 340px;
+  word-break: break-word;
 }
 
-@media screen and (max-width: 530px) {
+@media screen and (max-width: 540px) {
   .profile__name {
     margin-right: 0;
 
     max-width: 200px;
-    word-break: break-word;
 
     font-size: 27px;
     line-height: 33px;

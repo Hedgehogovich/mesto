@@ -5,9 +5,12 @@
   color: #fff;
   font-size: 18px;
   line-height: 22px;
+
+  max-width: 340px;
+  word-break: break-word;
 }
 
-@media screen and (max-width: 530px) {
+@media screen and (max-width: 540px) {
   .profile__job {
     text-align: center;
 

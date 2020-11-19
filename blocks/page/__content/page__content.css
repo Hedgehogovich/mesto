@@ -2,7 +2,7 @@
   margin-bottom: 66px;
 }
 
-@media screen and (max-width: 530px) {
+@media screen and (max-width: 540px) {
   .page__content {
     margin-bottom: 48px;
   }

@@ -8,20 +8,22 @@
 
   transition: opacity .1s linear;
   transform: translateY(15%);
+
+  flex-shrink: 0;
 }
 
 .profile__edit:hover {
   opacity: .6;
 }
 
-@media screen and (max-width: 530px) {
+@media screen and (max-width: 540px) {
   .profile__edit {
     position: absolute;
     top: 50%;
     right: -10px;
     transform: translate(100%, -50%);
 
-    background-size: calc(15px / 2) calc(15px / 2);
+    background-size: calc(15px / 2);
 
     width: 18px;
     height: 18px;

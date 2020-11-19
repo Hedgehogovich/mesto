@@ -6,7 +6,7 @@
   margin-bottom: 9px;
 }
 
-@media screen and (max-width: 530px) {
+@media screen and (max-width: 540px) {
   .profile__heading {
     position: relative;
     justify-content: center;
