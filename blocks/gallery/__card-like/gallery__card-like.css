@@ -9,4 +9,10 @@
 
   border: none;
   flex-shrink: 0;
+
+  transition: opacity .1s linear;
+}
+
+.gallery__card-like:hover {
+  opacity: .6;
 }

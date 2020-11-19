@@ -7,16 +7,23 @@
 
   border: 2px solid #fff;
   border-radius: 2px;
-  background: url('../../../images/add.svg') no-repeat center center;
-  background-size: 22px 22px;
+  background: url('../../../images/add.svg') no-repeat center / 22px;
+
+  cursor: pointer;
+
+  transition: opacity .1s linear;
 
   color: #fff;
+}
+
+.profile__add:hover {
+  opacity: .6;
 }
 
 @media screen and (max-width: 710px) {
   .profile__add {
     max-width: 300px;
 
-    background-size: 16px 16px;
+    background-size: 16px;
   }
 }
