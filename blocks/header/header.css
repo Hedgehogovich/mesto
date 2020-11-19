@@ -6,3 +6,10 @@
 
   border-bottom: 1px solid hsla(0, 0%, 33%, 0.7);
 }
+
+@media screen and (max-width: 710px) {
+  .header {
+    padding-left: 27px;
+    min-height: 56px;
+  }
+}

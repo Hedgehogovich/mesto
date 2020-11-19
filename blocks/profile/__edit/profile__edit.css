@@ -1,0 +1,22 @@
+.profile__edit {
+  border: 1px #fff solid;
+  background: url('../../../images/edit.svg') no-repeat center center;
+  background-size: 10px 10px;
+
+  width: 24px;
+  height: 24px;
+}
+
+@media screen and (max-width: 530px) {
+  .profile__edit {
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    transform: translate(100%, -50%);
+
+    background-size: calc(15px / 2) calc(15px / 2);
+
+    width: 18px;
+    height: 18px;
+  }
+}

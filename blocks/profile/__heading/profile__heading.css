@@ -1,0 +1,16 @@
+.profile__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+
+  margin-bottom: 16px;
+}
+
+@media screen and (max-width: 530px) {
+  .profile__heading {
+    position: relative;
+    justify-content: center;
+
+    margin-bottom: 14px;
+  }
+}
