@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="author" content="Юрий Чачило">
-  <meta name="description" content="проектная работа к курсу номер 3">
+  <meta name="description" content="проектная работа к курсу номер 4">
   <meta name="keywords" content="HTML,CSS">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto</title>
 </head>
-<body class="root root_modal_opened">
+<body class="root">
 <div class="page">
   <header class="header page__header">
     <div class="header__logo"></div>
@@ -25,7 +25,7 @@
             </h1>
             <button type="button" class="profile__edit"></button>
           </div>
-          <p class="profile__description">
+          <p class="profile__job">
             Исследователь океана
           </p>
         </div>
@@ -106,21 +106,24 @@
   <footer class="footer">
     <p class="footer__text">&copy; 2020 Mesto Russia</p>
   </footer>
-  <div class="popup popup_opened">
+  <div class="popup">
     <div class="popup__container">
       <button class="popup__close"></button>
-      <form action="#" class="edit-form">
+      <form class="edit-form">
         <p class="edit-form__title">
           Редактировать профиль
         </p>
-        <input type="text" autocomplete="name" value="Жак-Ив Кусто" class="edit-form__input">
-        <input type="text" value="Исследователь океана" class="edit-form__input">
+        <input type="text" autocomplete="name" class="edit-form__input edit-form__input_name">
+        <input type="text" class="edit-form__input edit-form__input_job">
         <button class="edit-form__submit">
           Сохранить
         </button>
       </form>
     </div>
   </div>
+  <script src="./blocks/profile/__edit/profile__edit.js"></script>
+  <script src="./blocks/popup/__close/popup__close.js"></script>
+  <script src="./blocks/edit-form/edit-form.js"></script>
 </div>
 </body>
 </html>
