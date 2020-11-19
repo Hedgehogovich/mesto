@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto</title>
 </head>
-<body class="root">
+<body class="root root_modal_opened">
 <div class="page">
   <header class="header page__header">
     <div class="header__logo"></div>
@@ -23,14 +23,14 @@
             <h1 class="profile__name">
               Жак-Ив Кусто
             </h1>
-            <button class="profile__edit"></button>
+            <button type="button" class="profile__edit"></button>
           </div>
           <p class="profile__description">
             Исследователь океана
           </p>
         </div>
       </div>
-      <button class="profile__add"></button>
+      <button type="button" class="profile__add"></button>
     </section>
     <section class="gallery">
       <ul class="gallery__grid">
@@ -41,7 +41,7 @@
               <h2 class="gallery__card-name">
                 Карачаевск
               </h2>
-              <button class="gallery__card-like"></button>
+              <button type="button" class="gallery__card-like"></button>
             </figcaption>
           </figure>
         </li>
@@ -52,7 +52,7 @@
               <h2 class="gallery__card-name">
                 Гора Эльбрус
               </h2>
-              <button class="gallery__card-like"></button>
+              <button type="button" class="gallery__card-like"></button>
             </figcaption>
           </figure>
         </li>
@@ -63,7 +63,7 @@
               <h2 class="gallery__card-name">
                 Домбай
               </h2>
-              <button class="gallery__card-like"></button>
+              <button type="button" class="gallery__card-like"></button>
             </figcaption>
           </figure>
         </li>
@@ -74,7 +74,7 @@
               <h2 class="gallery__card-name">
                 Гора Эльбрус
               </h2>
-              <button class="gallery__card-like"></button>
+              <button type="button" class="gallery__card-like"></button>
             </figcaption>
           </figure>
         </li>
@@ -85,7 +85,7 @@
               <h2 class="gallery__card-name">
                 Домбай
               </h2>
-              <button class="gallery__card-like"></button>
+              <button type="button" class="gallery__card-like"></button>
             </figcaption>
           </figure>
         </li>
@@ -96,7 +96,7 @@
               <h2 class="gallery__card-name">
                 Карачаево-Черкесия
               </h2>
-              <button class="gallery__card-like"></button>
+              <button type="button" class="gallery__card-like"></button>
             </figcaption>
           </figure>
         </li>
@@ -106,6 +106,21 @@
   <footer class="footer">
     <p class="footer__text">&copy; 2020 Mesto Russia</p>
   </footer>
+  <div class="popup-overlay popup-overlay_showed">
+    <div class="popup-overlay__wrapper">
+      <button class="popup-overlay__close"></button>
+      <form action="#" class="edit-form">
+        <p class="edit-form__title">
+          Редактировать профиль
+        </p>
+        <input type="text" autocomplete="name" value="Жак-Ив Кусто" class="edit-form__input">
+        <input type="text" value="Исследователь океана" class="edit-form__input">
+        <button class="edit-form__submit">
+          Сохранить
+        </button>
+      </form>
+    </div>
+  </div>
 </div>
 </body>
 </html>

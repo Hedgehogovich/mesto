@@ -1,0 +1,18 @@
+.edit-form {
+  background-color: #fff;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+
+  box-sizing: border-box;
+  min-width: 430px;
+
+  padding: 34px 36px 37px;
+}
+
+@media screen and (max-width: 530px) {
+  .edit-form {
+    min-width: 282px;
+
+    padding: 25px 22px;
+  }
+}

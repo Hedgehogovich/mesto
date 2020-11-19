@@ -1,0 +1,5 @@
+.popup-overlay_showed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
