@@ -1,7 +1,7 @@
 .popup-overlay__close {
   position: absolute;
   top: -40px;
-  right: 0;
+  right: -40px;
 
   border: none;
   background: transparent url('../../../images/close.svg') no-repeat center / cover;
@@ -11,11 +11,18 @@
   cursor: pointer;
 
   transform: rotate(45deg);
+
+  transition: opacity .1s linear;
+}
+
+.popup-overlay__close:hover {
+  opacity: .6;
 }
 
 @media screen and (max-width: 530px) {
   .popup-overlay__close {
     top: -45px;
+    right: 0;
 
     width: 26px;
     height: 26px;

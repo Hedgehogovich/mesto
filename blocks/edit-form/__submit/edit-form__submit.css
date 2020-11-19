@@ -10,6 +10,12 @@
 
   padding-top: 14px;
   padding-bottom: 14px;
+
+  transition: opacity .1s linear;
+}
+
+.edit-form__submit:hover {
+  opacity: .6;
 }
 
 @media screen and (max-width: 530px) {
