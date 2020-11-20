@@ -27,14 +27,14 @@
             <h1 class="profile__name">
               Жак-Ив Кусто
             </h1>
-            <button type="button" class="profile__edit"></button>
+            <button type="button" class="profile__edit" aria-label="Редактировать профиль"></button>
           </div>
           <p class="profile__job">
             Исследователь океана
           </p>
         </div>
       </div>
-      <button type="button" class="profile__add"></button>
+      <button type="button" class="profile__add" aria-label="Добавить изображение"></button>
     </section>
     <section class="gallery">
       <ul class="gallery__grid">
@@ -45,7 +45,7 @@
               <h2 class="gallery__card-name">
                 Карачаевск
               </h2>
-              <button type="button" class="gallery__card-like"></button>
+              <button type="button" class="gallery__card-like" aria-label="Поставить отметку нравится для фотографии"></button>
             </figcaption>
           </figure>
         </li>
@@ -56,7 +56,7 @@
               <h2 class="gallery__card-name">
                 Гора Эльбрус
               </h2>
-              <button type="button" class="gallery__card-like"></button>
+              <button type="button" class="gallery__card-like" aria-label="Поставить отметку нравится для фотографии"></button>
             </figcaption>
           </figure>
         </li>
@@ -67,7 +67,7 @@
               <h2 class="gallery__card-name">
                 Домбай
               </h2>
-              <button type="button" class="gallery__card-like"></button>
+              <button type="button" class="gallery__card-like" aria-label="Поставить отметку нравится для фотографии"></button>
             </figcaption>
           </figure>
         </li>
@@ -78,7 +78,7 @@
               <h2 class="gallery__card-name">
                 Гора Эльбрус
               </h2>
-              <button type="button" class="gallery__card-like"></button>
+              <button type="button" class="gallery__card-like" aria-label="Поставить отметку нравится для фотографии"></button>
             </figcaption>
           </figure>
         </li>
@@ -89,7 +89,7 @@
               <h2 class="gallery__card-name">
                 Домбай
               </h2>
-              <button type="button" class="gallery__card-like"></button>
+              <button type="button" class="gallery__card-like" aria-label="Поставить отметку нравится для фотографии"></button>
             </figcaption>
           </figure>
         </li>
@@ -100,7 +100,7 @@
               <h2 class="gallery__card-name">
                 Карачаево-Черкесия
               </h2>
-              <button type="button" class="gallery__card-like"></button>
+              <button type="button" class="gallery__card-like" aria-label="Поставить отметку нравится для фотографии"></button>
             </figcaption>
           </figure>
         </li>
@@ -112,22 +112,20 @@
   </footer>
   <div class="popup">
     <div class="popup__container">
-      <button type="button" class="popup__close"></button>
-      <form class="edit-form">
-        <p class="edit-form__title">
+      <button type="button" class="popup__close" aria-label="Закрыть всплывающее окно"></button>
+      <form name="edit-form" class="edit-form">
+        <h2 class="edit-form__title">
           Редактировать профиль
-        </p>
-        <input type="text" autocomplete="name" class="edit-form__input edit-form__input_name">
-        <input type="text" class="edit-form__input edit-form__input_job">
+        </h2>
+        <input name="name" type="text" autocomplete="name" class="edit-form__input edit-form__input_type_name">
+        <input name="job" type="text" class="edit-form__input edit-form__input_type_job">
         <button type="submit" class="edit-form__submit">
           Сохранить
         </button>
       </form>
     </div>
   </div>
-  <script src="./blocks/profile/__edit/profile__edit.js"></script>
-  <script src="./blocks/popup/__close/popup__close.js"></script>
-  <script src="./blocks/edit-form/edit-form.js"></script>
 </div>
+<script src="./scripts/index.js"></script>
 </body>
 </html>

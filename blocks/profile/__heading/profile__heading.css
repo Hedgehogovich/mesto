@@ -12,5 +12,7 @@
     justify-content: center;
 
     margin-bottom: 14px;
+
+    transform: translateX(14px);
   }
 }

@@ -4,14 +4,14 @@
   border-radius: 10px;
 
   box-sizing: border-box;
-  width: 430px;
+  min-width: 430px;
 
   padding: 34px 36px 37px;
 }
 
 @media screen and (max-width: 540px) {
   .edit-form {
-    width: 282px;
+    min-width: 282px;
 
     padding: 25px 22px;
   }
