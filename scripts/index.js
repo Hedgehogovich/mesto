@@ -1,4 +1,11 @@
 (document => {
+  let rootElement = document.querySelector('.root');
+  let popupElement = document.querySelector('.popup');
+
+  let popupCloseButton = document.querySelector('.popup__close');
+  let editButton = document.querySelector('.profile__edit');
+  let formElement = document.querySelector('.edit-form');
+
   function updateInputByTextElement(inputSelector, textElementSelector) {
     let textContent = document.querySelector(textElementSelector).textContent.trim();
     let inputElement = document.querySelector(inputSelector);
@@ -31,19 +38,13 @@
   }
 
   function showModal() {
-    let rootElement = document.querySelector('.root');
-    let popupElement = document.querySelector('.popup');
-
-    rootElement.classList.add('root_modal_opened');
+    rootElement.classList.add('root_opened');
     popupElement.classList.add('popup_opened');
   }
 
   function closeModal() {
-    let popupElement = document.querySelector('.popup');
-    let rootElement = document.querySelector('.root');
-
     popupElement.classList.remove('popup_opened');
-    rootElement.classList.remove('root_modal_opened');
+    rootElement.classList.remove('root_opened');
   }
 
   function onEditButtonClick() {
@@ -55,7 +56,6 @@
   function onCloseButtonClick() {
     closeModal();
 
-    let formElement = document.querySelector('.edit-form');
     formElement.reset();
   }
 
@@ -67,10 +67,6 @@
 
     closeModal();
   }
-
-  let popupCloseButton = document.querySelector('.popup__close');
-  let editButton = document.querySelector('.profile__edit');
-  let formElement = document.querySelector('.edit-form');
 
   editButton.addEventListener('click', onEditButtonClick);
   popupCloseButton.addEventListener('click', onCloseButtonClick);

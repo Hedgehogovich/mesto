@@ -2,7 +2,7 @@
 @import url('../vendor/fonts.css');
 
 @import url('../blocks/root/root.css');
-@import url('../blocks/root/_modal_opened/root_modal_opened.css');
+@import url('../blocks/root/_opened/root_opened.css');
 @import url('../blocks/page/page.css');
 @import url('../blocks/page/__header/page__header.css');
 @import url('../blocks/page/__content/page__content.css');
