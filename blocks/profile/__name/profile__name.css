@@ -5,7 +5,7 @@
   font-size: 42px;
   line-height: 1.14;
 
-  margin: 0 18px 0 0;
+  margin: 0;
 
   max-width: 340px;
   text-overflow: ellipsis;
@@ -15,8 +15,6 @@
 
 @media screen and (max-width: 540px) {
   .profile__name {
-    margin-right: 10px;
-
     max-width: 220px;
 
     font-size: 27px;

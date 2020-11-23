@@ -7,7 +7,7 @@
   padding: 0;
 
   transition: opacity .1s linear;
-  transform: translateY(5px);
+  transform: translateY(4px);
 
   flex-shrink: 0;
 }
@@ -18,7 +18,7 @@
 
 @media screen and (max-width: 540px) {
   .profile__edit {
-    transform: translateY(2px);
+    transform: translateY(0);
 
     background-size: calc(15px / 2);
 
