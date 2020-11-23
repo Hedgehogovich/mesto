@@ -5,15 +5,13 @@
 
   padding: 0;
 
+  background: url('../../../images/add.svg') no-repeat center / 22px;
   border: 2px solid #fff;
   border-radius: 2px;
-  background: url('../../../images/add.svg') no-repeat center / 22px;
-
+  color: #fff;
   cursor: pointer;
 
   transition: opacity .1s linear;
-
-  color: #fff;
 }
 
 .profile__add:hover {

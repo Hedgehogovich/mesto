@@ -1,4 +1,6 @@
 .profile__job {
+  max-width: 340px;
+
   margin-top: 0;
   margin-bottom: 0;
 
@@ -6,7 +8,6 @@
   font-size: 18px;
   line-height: 22px;
 
-  max-width: 340px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -14,10 +15,9 @@
 
 @media screen and (max-width: 540px) {
   .profile__job {
-    text-align: center;
-
     max-width: 282px;
 
+    text-align: center;
     font-size: 14px;
     line-height: 17px;
   }

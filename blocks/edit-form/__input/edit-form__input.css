@@ -2,6 +2,7 @@
   display: block;
   width: 100%;
 
+  margin-bottom: 26px;
   padding-bottom: 11px;
 
   border: none;
@@ -9,8 +10,6 @@
 
   font-size: 14px;
   line-height: 17px;
-
-  margin-bottom: 26px;
 }
 
 .edit-form__input:last-of-type {

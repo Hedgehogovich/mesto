@@ -1,15 +1,14 @@
 .edit-form__submit {
   width: 100%;
 
-  border: none;
+  padding: 14px 0;
+
   background-color: #000;
+  border: none;
   color: #fff;
 
   font-size: 18px;
   line-height: 22px;
-
-  padding-top: 14px;
-  padding-bottom: 14px;
 
   transition: opacity .1s linear;
 }

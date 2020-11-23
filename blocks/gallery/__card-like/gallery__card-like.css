@@ -1,14 +1,13 @@
 .gallery__card-like {
-  background: transparent url('../../../images/heart.svg') no-repeat center / contain;
-  padding: 0;
-
-  cursor: pointer;
-
   width: 21px;
   height: 19px;
-
-  border: none;
   flex-shrink: 0;
+
+  padding: 0;
+
+  background: transparent url('../../../images/heart.svg') no-repeat center / contain;
+  border: none;
+  cursor: pointer;
 
   transition: opacity .1s linear;
 }
