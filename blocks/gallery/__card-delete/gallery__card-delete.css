@@ -12,6 +12,7 @@
   border: none;
   cursor: pointer;
   /* невозможно увидеть на очень светлом/белом фоне, сделано как временное решение */
+  -webkit-filter: drop-shadow(0 0 3px #000);
   filter: drop-shadow(0 0 3px #000);
 
   transition: opacity .1s linear;

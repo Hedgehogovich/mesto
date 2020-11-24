@@ -30,7 +30,7 @@
   const galleryGrid = root.querySelector('.gallery__grid');
 
   const popup = root.querySelector('.popup');
-  const popups = root.querySelector('.popup-list');
+  const popupsList = root.querySelector('.popup-list');
   const popupContainer = popup.querySelector('.popup__container');
   const popupCloseButton = root.querySelector('.popup__close');
 
@@ -110,7 +110,7 @@
     root.classList.remove('root_opened');
 
     popupContainer.removeChild(currentInnerPopupElement);
-    popups.appendChild(currentInnerPopupElement);
+    popupsList.appendChild(currentInnerPopupElement);
     currentInnerPopupElement = null;
   }
 
