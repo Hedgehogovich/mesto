@@ -25,12 +25,16 @@
 @import url('../blocks/gallery/__grid/gallery__grid.css');
 @import url('../blocks/gallery/__card/gallery__card.css');
 @import url('../blocks/gallery/__card-image/gallery__card-image.css');
+@import url('../blocks/gallery/__card-delete/gallery__card-delete.css');
 @import url('../blocks/gallery/__card-caption/gallery__card-caption.css');
 @import url('../blocks/gallery/__card-name/gallery__card-name.css');
 @import url('../blocks/gallery/__card-like/gallery__card-like.css');
+@import url('../blocks/gallery/__card-like/_active/gallery__card-like_active.css');
 
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__text/footer__text.css');
+
+@import url('../blocks/popup-list/popup-list.css');
 
 @import url('../blocks/popup/popup.css');
 @import url('../blocks/popup/_opened/popup_opened.css');
@@ -41,3 +45,5 @@
 @import url('../blocks/edit-form/__title/edit-form__title.css');
 @import url('../blocks/edit-form/__input/edit-form__input.css');
 @import url('../blocks/edit-form/__submit/edit-form__submit.css');
+
+@import url('../blocks/zoom-preview/zoom-preview.css');

@@ -35,93 +35,39 @@
       <button type="button" class="profile__add" aria-label="Добавить изображение"></button>
     </section>
     <section class="gallery">
-      <ul class="gallery__grid">
-        <li class="gallery__grid-item">
-          <figure class="gallery__card">
-            <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="заброшенный храм на холмистой местности, лес" class="gallery__card-image">
-            <figcaption class="gallery__card-caption">
-              <h2 class="gallery__card-name">
-                Карачаевск
-              </h2>
-              <button type="button" class="gallery__card-like" aria-label="Поставить отметку нравится для фотографии"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="gallery__grid-item">
-          <figure class="gallery__card">
-            <img src="./images/kirill-pershin-1404681-unsplash.jpg" alt="поле, на фоне гора Эльбрус" class="gallery__card-image">
-            <figcaption class="gallery__card-caption">
-              <h2 class="gallery__card-name">
-                Гора Эльбрус
-              </h2>
-              <button type="button" class="gallery__card-like" aria-label="Поставить отметку нравится для фотографии"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="gallery__grid-item">
-          <figure class="gallery__card">
-            <img src="./images/kirill-pershin-1556355-unsplash.jpg" alt="лес, горы со снежными шапками" class="gallery__card-image">
-            <figcaption class="gallery__card-caption">
-              <h2 class="gallery__card-name">
-                Домбай
-              </h2>
-              <button type="button" class="gallery__card-like" aria-label="Поставить отметку нравится для фотографии"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="gallery__grid-item">
-          <figure class="gallery__card">
-            <img src="./images/kirill-pershin-1404681-unsplash.jpg" alt="поле, на фоне гора Эльбрус" class="gallery__card-image">
-            <figcaption class="gallery__card-caption">
-              <h2 class="gallery__card-name">
-                Гора Эльбрус
-              </h2>
-              <button type="button" class="gallery__card-like" aria-label="Поставить отметку нравится для фотографии"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="gallery__grid-item">
-          <figure class="gallery__card">
-            <img src="./images/kirill-pershin-1556355-unsplash.jpg" alt="лес, горы со снежными шапками" class="gallery__card-image">
-            <figcaption class="gallery__card-caption">
-              <h2 class="gallery__card-name">
-                Домбай
-              </h2>
-              <button type="button" class="gallery__card-like" aria-label="Поставить отметку нравится для фотографии"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="gallery__grid-item">
-          <figure class="gallery__card">
-            <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="заброшенный храм на холмистой местности, лес" class="gallery__card-image">
-            <figcaption class="gallery__card-caption">
-              <h2 class="gallery__card-name">
-                Карачаево-Черкесия
-              </h2>
-              <button type="button" class="gallery__card-like" aria-label="Поставить отметку нравится для фотографии"></button>
-            </figcaption>
-          </figure>
-        </li>
-      </ul>
+      <ul class="gallery__grid"></ul>
     </section>
   </main>
   <footer class="footer">
     <p class="footer__text">&copy; 2020 Mesto Russia</p>
   </footer>
-  <div class="popup">
-    <div class="popup__container">
-      <button type="button" class="popup__close" aria-label="Закрыть всплывающее окно"></button>
-      <form name="edit-form" class="edit-form">
-        <h2 class="edit-form__title">
-          Редактировать профиль
-        </h2>
-        <input name="name" type="text" autocomplete="name" class="edit-form__input edit-form__input_type_name">
-        <input name="job" type="text" class="edit-form__input edit-form__input_type_job">
-        <button type="submit" class="edit-form__submit">
-          Сохранить
-        </button>
-      </form>
-    </div>
+</div>
+<div class="popup-list" aria-hidden="true">
+  <form name="profile" class="edit-form">
+    <h2 class="edit-form__title">
+      Редактировать профиль
+    </h2>
+    <input name="name" type="text" autocomplete="name" class="edit-form__input edit-form__input_type_name">
+    <input name="job" type="text" class="edit-form__input edit-form__input_type_job">
+    <button type="submit" class="edit-form__submit">
+      Сохранить
+    </button>
+  </form>
+  <form name="new-place" class="edit-form">
+    <h2 class="edit-form__title">
+      Новое место
+    </h2>
+    <input name="place-name" type="text" placeholder="Название" class="edit-form__input edit-form__input_type_place-name">
+    <input name="picture" type="text" placeholder="Ссылка на картинку" class="edit-form__input edit-form__input_type_picture">
+    <button type="submit" class="edit-form__submit">
+      Сохранить
+    </button>
+  </form>
+  <div class="zoom-preview"></div>
+</div>
+<div class="popup">
+  <div class="popup__container">
+    <button type="button" class="popup__close" aria-label="Закрыть всплывающее окно"></button>
   </div>
 </div>
 <script src="./scripts/index.js"></script>

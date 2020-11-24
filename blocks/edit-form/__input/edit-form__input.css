@@ -12,6 +12,10 @@
   line-height: 17px;
 }
 
+.edit-form__input::placeholder {
+  color: #c4c4c4;
+}
+
 .edit-form__input:last-of-type {
   margin-bottom: 48px;
 }
