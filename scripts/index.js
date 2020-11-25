@@ -176,10 +176,6 @@
     closePopup();
   }
 
-  function getElementTextContent(element) {
-    return element.textContent.trim();
-  }
-
   function onProfileEditButtonClick() {
     const nameInput = createPopupFormInput('name', getElementTextContent(profileNameElement));
     const jobInput = createPopupFormInput('job', getElementTextContent(profileJobElement));
