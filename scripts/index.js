@@ -39,6 +39,8 @@
 
   const addPlaceButton = root.querySelector('.profile__add');
 
+  const EDIT_FORM_INPUT_CLASS = 'edit-form__input'
+
   function showPopup(innerPopupElement) {
     popupContainer.appendChild(innerPopupElement);
 
@@ -118,7 +120,7 @@
   function createPopupFormInput(name, defaultValue = '', placeholder = '') {
     const input = document.createElement('input');
 
-    input.classList.add('edit-form__input');
+    input.classList.add(EDIT_FORM_INPUT_CLASS);
     input.type = 'text';
     input.name = name;
     if (placeholder) {
@@ -170,8 +172,8 @@
     event.preventDefault();
     const {currentTarget: form} = event;
 
-    profileNameElement.textContent = getInputElementValue(form.querySelector('.edit-form__input[name="name"]'));
-    profileJobElement.textContent = getInputElementValue(form.querySelector('.edit-form__input[name="job"]'));
+    profileNameElement.textContent = getInputElementValue(form.querySelector(`.${EDIT_FORM_INPUT_CLASS}[name="name"]`));
+    profileJobElement.textContent = getInputElementValue(form.querySelector(`.${EDIT_FORM_INPUT_CLASS}[name="job"]`));
 
     closePopup();
   }
@@ -188,8 +190,8 @@
     event.preventDefault();
     const {currentTarget: form} = event;
 
-    const name = getInputElementValue(form.querySelector('.edit-form__input[name="place-name"]'));
-    const link = getInputElementValue(form.querySelector('.edit-form__input[name="picture"]'));
+    const name = getInputElementValue(form.querySelector(`.${EDIT_FORM_INPUT_CLASS}[name="place-name"]`));
+    const link = getInputElementValue(form.querySelector(`.${EDIT_FORM_INPUT_CLASS}[name="picture"]`));
 
     galleryGrid.prepend(createCardElement({name, link}));
     closePopup();
