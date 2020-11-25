@@ -15,4 +15,6 @@
 * Обработка браузерных событий
 * Функции (обычные, с укороченным синтаксисом и самовызывающиеся)
 
-Ссылка на рабочий проект - https://hedgehogovich.github.io/mesto/
+Ссылки на рабочий проект:
+- [GitHub Pages](https://hedgehogovich.github.io/mesto/)
+- [Amazon Web Services](https://main.dkegi8ozvsdyh.amplifyapp.com)
