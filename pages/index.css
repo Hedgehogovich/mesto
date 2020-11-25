@@ -8,10 +8,10 @@
 @import url('../blocks/page/__content/page__content.css');
 @import url('../blocks/page/__profile/page__profile.css');
 
+@import url('../blocks/page/__section/page__section.css');
+
 @import url('../blocks/header/header.css');
 @import url('../blocks/header/__logo/header__logo.css');
-
-@import url('../blocks/content/content.css');
 
 @import url('../blocks/profile/profile.css');
 @import url('../blocks/profile/__user/profile__user.css');
@@ -31,7 +31,6 @@
 @import url('../blocks/gallery/__card-like/gallery__card-like.css');
 @import url('../blocks/gallery/__card-like/_active/gallery__card-like_active.css');
 
-@import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__text/footer__text.css');
 
 @import url('../blocks/popup-list/popup-list.css');
