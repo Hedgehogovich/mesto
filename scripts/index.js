@@ -29,7 +29,6 @@
   const root = document.querySelector('.root');
   const galleryGrid = root.querySelector('.gallery__grid');
 
-  const popupsList = root.querySelector('.popup-list');
   const popup = root.querySelector('.popup');
   const popupContainer = popup.querySelector('.popup__container');
   const popupCloseButton = popup.querySelector('.popup__close');
@@ -37,17 +36,10 @@
   const editProfileButton = root.querySelector('.profile__edit');
   const profileNameElement = root.querySelector('.profile__name');
   const profileJobElement = root.querySelector('.profile__job');
-  const profileForm = root.querySelector('.edit-form[name="profile"]');
-  const profileNameInput = profileForm.querySelector('.edit-form__input[name="name"]');
-  const profileJobInput = profileForm.querySelector('.edit-form__input[name="job"]');
 
   const addPlaceButton = root.querySelector('.profile__add');
-  const newPlaceForm = root.querySelector('.edit-form[name="new-place"]');
-
-  let currentInnerPopupElement = null;
 
   function showPopup(innerPopupElement) {
-    currentInnerPopupElement = innerPopupElement;
     popupContainer.appendChild(innerPopupElement);
 
     root.classList.add('root_opened');
@@ -58,15 +50,11 @@
     popup.classList.remove('popup_opened');
     root.classList.remove('root_opened');
 
-    popupContainer.removeChild(currentInnerPopupElement);
-    popupsList.appendChild(currentInnerPopupElement);
-    currentInnerPopupElement = null;
+    popupContainer.removeChild(popupContainer.lastElementChild);
   }
 
   function onLikeButtonClick(event) {
-    const {currentTarget} = event;
-
-    currentTarget.classList.toggle('gallery__card-like_active');
+    event.currentTarget.classList.toggle('gallery__card-like_active');
   }
 
   function onPictureClick(event) {
@@ -81,20 +69,19 @@
   }
 
   function onDeleteButtonClick(event) {
-    const {currentTarget} = event;
-    const cardElement = currentTarget.closest('.gallery__grid-item');
+    const cardElement = event.currentTarget.closest('.gallery__grid-item');
 
     galleryGrid.removeChild(cardElement);
   }
 
   function createCardElement(card) {
     const heading = document.createElement('h2');
-    heading.textContent = card.name;
     heading.classList.add('gallery__card-name');
+    heading.textContent = card.name;
 
     const likeButton = document.createElement('button');
-    likeButton.type = 'button';
     likeButton.classList.add('gallery__card-like');
+    likeButton.type = 'button';
     likeButton.ariaLabel = 'Поставить отметку нравится для фотографии';
     likeButton.addEventListener('click', onLikeButtonClick);
 
@@ -104,9 +91,9 @@
     cardCaption.appendChild(likeButton);
 
     const cardImage = document.createElement('img');
+    cardImage.classList.add('gallery__card-image');
     cardImage.src = card.link;
     cardImage.alt = card.name;
-    cardImage.classList.add('gallery__card-image');
     cardImage.addEventListener('click', onPictureClick);
 
     const deleteCardButton = document.createElement('button');
@@ -128,47 +115,96 @@
     return gridElement;
   }
 
-  function updateProfileFormInputByTextElement(inputElement, textElement) {
-    const textContent = textElement.textContent.trim();
+  function createPopupFormInput(name, defaultValue = '', placeholder = '') {
+    const input = document.createElement('input');
 
-    inputElement.value = textContent;
-    inputElement.setAttribute('value', textContent);
+    input.classList.add('edit-form__input');
+    input.type = 'text';
+    input.name = name;
+    if (placeholder) {
+      input.placeholder = placeholder;
+    }
+    if (defaultValue) {
+      input.value = defaultValue;
+    }
+
+    return input;
   }
 
-  function updateProfileElementByInputValue(textElement, inputElement) {
-    textElement.textContent = inputElement.value.trim();
+  function createPopupForm(name, heading, inputs, onSubmit) {
+    const form = document.createElement('form');
+
+    form.classList.add('edit-form');
+    form.addEventListener('submit', onSubmit);
+
+    const headingElement = document.createElement('h2');
+
+    headingElement.classList.add('edit-form__title');
+    headingElement.textContent = heading;
+
+    form.appendChild(headingElement);
+
+    if (inputs?.length) {
+      inputs.forEach((input) => form.appendChild(input));
+    }
+
+    const submitButton = document.createElement('button');
+
+    submitButton.classList.add('edit-form__submit');
+    submitButton.type = 'submit';
+    submitButton.textContent = 'Сохранить';
+    form.appendChild(submitButton);
+
+    return form;
   }
 
-  function onProfileEditButtonClick() {
-    updateProfileFormInputByTextElement(profileNameInput, profileNameElement);
-    updateProfileFormInputByTextElement(profileJobInput, profileJobElement);
+  function getElementTextContent(element) {
+    return element.textContent.trim();
+  }
 
-    showPopup(profileForm);
+  function getInputElementValue(inputElement) {
+    return inputElement.value.trim();
   }
 
   function onProfileFormSubmit(event) {
     event.preventDefault();
+    const {currentTarget: form} = event;
 
-    updateProfileElementByInputValue(profileNameElement, profileNameInput);
-    updateProfileElementByInputValue(profileJobElement, profileJobInput);
+    profileNameElement.textContent = getInputElementValue(form.querySelector('.edit-form__input[name="name"]'));
+    profileJobElement.textContent = getInputElementValue(form.querySelector('.edit-form__input[name="job"]'));
 
     closePopup();
   }
 
-  function onAddNewPlaceButtonClick() {
-    newPlaceForm.reset();
+  function getElementTextContent(element) {
+    return element.textContent.trim();
+  }
 
-    showPopup(newPlaceForm);
+  function onProfileEditButtonClick() {
+    const nameInput = createPopupFormInput('name', getElementTextContent(profileNameElement));
+    const jobInput = createPopupFormInput('job', getElementTextContent(profileJobElement));
+    const form = createPopupForm('profile', 'Редактировать профиль', [nameInput, jobInput], onProfileFormSubmit);
+
+    showPopup(form);
   }
 
   function onNewPlaceFormSubmit(event) {
     event.preventDefault();
+    const {currentTarget: form} = event;
 
-    const name = newPlaceForm.querySelector('.edit-form__input[name="place-name"]').value.trim();
-    const link = newPlaceForm.querySelector('.edit-form__input[name="picture"]').value.trim();
+    const name = getInputElementValue(form.querySelector('.edit-form__input[name="place-name"]'));
+    const link = getInputElementValue(form.querySelector('.edit-form__input[name="picture"]'));
 
     galleryGrid.prepend(createCardElement({name, link}));
     closePopup();
+  }
+
+  function onAddNewPlaceButtonClick() {
+    const placeNameInput = createPopupFormInput('place-name', '', 'Название');
+    const pictureInput = createPopupFormInput('picture', '', 'Ссылка на картинку');
+    const form = createPopupForm('new-place', 'Новое место', [placeNameInput, pictureInput], onNewPlaceFormSubmit);
+
+    showPopup(form);
   }
 
   function addInitialCardsToGrid() {
@@ -180,8 +216,6 @@
   editProfileButton.addEventListener('click', onProfileEditButtonClick);
   addPlaceButton.addEventListener('click', onAddNewPlaceButtonClick);
   popupCloseButton.addEventListener('click', closePopup);
-  profileForm.addEventListener('submit', onProfileFormSubmit);
-  newPlaceForm.addEventListener('submit', onNewPlaceFormSubmit);
 
   addInitialCardsToGrid();
 })(document);
