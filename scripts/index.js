@@ -42,7 +42,7 @@
   const cardTemplate = root.querySelector('#gallery-card').content;
   const formTemplate = root.querySelector('#edit-form').content;
 
-  const EDIT_FORM_INPUT_CLASS = 'edit-form__input'
+  const editFormInputClass = 'edit-form__input'
 
   function showPopup(innerPopupElement) {
     popupContainer.append(innerPopupElement);
@@ -99,7 +99,7 @@
   function createPopupFormInput(name, defaultValue = '', placeholder = '') {
     const input = document.createElement('input');
 
-    input.classList.add(EDIT_FORM_INPUT_CLASS);
+    input.classList.add(editFormInputClass);
     input.type = 'text';
     input.name = name;
     if (placeholder) {
@@ -118,10 +118,8 @@
     formElement.querySelector('.edit-form__title').textContent = heading;
     formElement.addEventListener('submit', onSubmit);
 
-    if (Array.isArray(inputs) && inputs.length) {
-      const submitButton = formElement.querySelector('.edit-form__submit');
-      inputs.forEach((input) => submitButton.parentElement.insertBefore(input, submitButton));
-    }
+    const submitButton = formElement.querySelector('.edit-form__submit');
+    inputs.forEach((input) => submitButton.parentElement.insertBefore(input, submitButton));
 
     return formElement;
   }
@@ -138,8 +136,8 @@
     evt.preventDefault();
     const {target: form} = evt;
 
-    profileNameElement.textContent = getInputElementValue(form.querySelector(`.${EDIT_FORM_INPUT_CLASS}[name="name"]`));
-    profileJobElement.textContent = getInputElementValue(form.querySelector(`.${EDIT_FORM_INPUT_CLASS}[name="job"]`));
+    profileNameElement.textContent = getInputElementValue(form.querySelector(`.${editFormInputClass}[name="name"]`));
+    profileJobElement.textContent = getInputElementValue(form.querySelector(`.${editFormInputClass}[name="job"]`));
 
     closePopup();
   }
@@ -156,14 +154,14 @@
     evt.preventDefault();
     const {currentTarget: form} = evt;
 
-    const name = getInputElementValue(form.querySelector(`.${EDIT_FORM_INPUT_CLASS}[name="place-name"]`));
-    const link = getInputElementValue(form.querySelector(`.${EDIT_FORM_INPUT_CLASS}[name="picture"]`));
+    const name = getInputElementValue(form.querySelector(`.${editFormInputClass}[name="place-name"]`));
+    const link = getInputElementValue(form.querySelector(`.${editFormInputClass}[name="picture"]`));
 
     galleryGrid.prepend(createCardElement({name, link}));
     closePopup();
   }
 
-  function onAddNewPlaceButtonClick() {
+  function onNewPlaceButtonClick() {
     const placeNameInput = createPopupFormInput('place-name', '', 'Название');
     const pictureInput = createPopupFormInput('picture', '', 'Ссылка на картинку');
     const form = createPopupForm('new-place', 'Новое место', [placeNameInput, pictureInput], onNewPlaceFormSubmit);
@@ -178,7 +176,7 @@
   }
 
   editProfileButton.addEventListener('click', onProfileEditButtonClick);
-  addPlaceButton.addEventListener('click', onAddNewPlaceButtonClick);
+  addPlaceButton.addEventListener('click', onNewPlaceButtonClick);
   popupCloseButton.addEventListener('click', closePopup);
 
   addInitialCardsToGrid();
