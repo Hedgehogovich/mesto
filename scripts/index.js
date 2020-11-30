@@ -39,10 +39,13 @@
 
   const addPlaceButton = root.querySelector('.profile__add');
 
+  const cardTemplate = root.querySelector('#gallery-card').content;
+  const formTemplate = root.querySelector('#edit-form').content;
+
   const EDIT_FORM_INPUT_CLASS = 'edit-form__input'
 
   function showPopup(innerPopupElement) {
-    popupContainer.appendChild(innerPopupElement);
+    popupContainer.append(innerPopupElement);
 
     root.classList.add('root_opened');
     popup.classList.add('popup_opened');
@@ -52,67 +55,43 @@
     popup.classList.remove('popup_opened');
     root.classList.remove('root_opened');
 
-    popupContainer.removeChild(popupContainer.lastElementChild);
+    popupContainer.lastElementChild.remove();
   }
 
-  function onLikeButtonClick(event) {
-    event.currentTarget.classList.toggle('gallery__card-like_active');
+  function onLikeButtonClick(evt) {
+    evt.target.classList.toggle('gallery__card-like_active');
   }
 
-  function onPictureClick(event) {
-    const {currentTarget} = event;
+  function onPictureClick(evt) {
+    const {target: img} = evt;
 
     const zoomImage = document.createElement('img');
     zoomImage.classList.add('zoom-preview');
-    zoomImage.src = currentTarget.src;
-    zoomImage.alt = currentTarget.alt;
+    zoomImage.src = img.src;
+    zoomImage.alt = img.alt;
 
     showPopup(zoomImage);
   }
 
-  function onDeleteButtonClick(event) {
-    const cardElement = event.currentTarget.closest('.gallery__grid-item');
-
-    galleryGrid.removeChild(cardElement);
+  function onDeleteButtonClick(evt) {
+    evt.target.closest('.gallery__grid-item').remove();
   }
 
   function createCardElement(card) {
-    const heading = document.createElement('h2');
-    heading.classList.add('gallery__card-name');
-    heading.textContent = card.name;
+    const cardElement = cardTemplate.cloneNode(true);
 
-    const likeButton = document.createElement('button');
-    likeButton.classList.add('gallery__card-like');
-    likeButton.type = 'button';
-    likeButton.ariaLabel = 'Поставить отметку нравится для фотографии';
-    likeButton.addEventListener('click', onLikeButtonClick);
+    cardElement.querySelector('.gallery__card-name').textContent = card.name;
+    cardElement.querySelector('.gallery__card-like').addEventListener('click', onLikeButtonClick);
+    cardElement.querySelector('.gallery__card-delete').addEventListener('click', onDeleteButtonClick);
 
-    const cardCaption = document.createElement('figcaption');
-    cardCaption.classList.add('gallery__card-caption');
-    cardCaption.appendChild(heading);
-    cardCaption.appendChild(likeButton);
-
-    const cardImage = document.createElement('img');
-    cardImage.classList.add('gallery__card-image');
+    const cardImage = cardElement.querySelector('.gallery__card-image');
     cardImage.src = card.link;
     cardImage.alt = card.name;
     cardImage.addEventListener('click', onPictureClick);
 
-    const deleteCardButton = document.createElement('button');
-    deleteCardButton.classList.add('gallery__card-delete');
-    deleteCardButton.type = 'button';
-    deleteCardButton.ariaLabel = 'Удалить фотографию';
-    deleteCardButton.addEventListener('click', onDeleteButtonClick);
-
-    const cardElement = document.createElement('figure');
-    cardElement.classList.add('gallery__card');
-    cardElement.appendChild(cardImage);
-    cardElement.appendChild(deleteCardButton);
-    cardElement.appendChild(cardCaption);
-
     const gridElement = document.createElement('li');
     gridElement.classList.add('gallery__grid-item');
-    gridElement.appendChild(cardElement);
+    gridElement.append(cardElement);
 
     return gridElement;
   }
@@ -134,30 +113,17 @@
   }
 
   function createPopupForm(name, heading, inputs, onSubmit) {
-    const form = document.createElement('form');
+    const formElement = formTemplate.cloneNode(true);
 
-    form.classList.add('edit-form');
-    form.addEventListener('submit', onSubmit);
+    formElement.querySelector('.edit-form__title').textContent = heading;
+    formElement.addEventListener('submit', onSubmit);
 
-    const headingElement = document.createElement('h2');
-
-    headingElement.classList.add('edit-form__title');
-    headingElement.textContent = heading;
-
-    form.appendChild(headingElement);
-
-    if (inputs?.length) {
-      inputs.forEach((input) => form.appendChild(input));
+    if (Array.isArray(inputs) && inputs.length) {
+      const submitButton = formElement.querySelector('.edit-form__submit');
+      inputs.forEach((input) => submitButton.parentElement.insertBefore(input, submitButton));
     }
 
-    const submitButton = document.createElement('button');
-
-    submitButton.classList.add('edit-form__submit');
-    submitButton.type = 'submit';
-    submitButton.textContent = 'Сохранить';
-    form.appendChild(submitButton);
-
-    return form;
+    return formElement;
   }
 
   function getElementTextContent(element) {
@@ -168,9 +134,9 @@
     return inputElement.value.trim();
   }
 
-  function onProfileFormSubmit(event) {
-    event.preventDefault();
-    const {currentTarget: form} = event;
+  function onProfileFormSubmit(evt) {
+    evt.preventDefault();
+    const {target: form} = evt;
 
     profileNameElement.textContent = getInputElementValue(form.querySelector(`.${EDIT_FORM_INPUT_CLASS}[name="name"]`));
     profileJobElement.textContent = getInputElementValue(form.querySelector(`.${EDIT_FORM_INPUT_CLASS}[name="job"]`));
@@ -186,9 +152,9 @@
     showPopup(form);
   }
 
-  function onNewPlaceFormSubmit(event) {
-    event.preventDefault();
-    const {currentTarget: form} = event;
+  function onNewPlaceFormSubmit(evt) {
+    evt.preventDefault();
+    const {currentTarget: form} = evt;
 
     const name = getInputElementValue(form.querySelector(`.${EDIT_FORM_INPUT_CLASS}[name="place-name"]`));
     const link = getInputElementValue(form.querySelector(`.${EDIT_FORM_INPUT_CLASS}[name="picture"]`));
@@ -207,7 +173,7 @@
 
   function addInitialCardsToGrid() {
     initialCards.forEach(card => {
-      galleryGrid.appendChild(createCardElement(card));
+      galleryGrid.append(createCardElement(card));
     });
   }
 
