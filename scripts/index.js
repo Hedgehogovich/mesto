@@ -116,7 +116,7 @@
     const formElement = formTemplate.cloneNode(true);
 
     formElement.querySelector('.edit-form__title').textContent = heading;
-    formElement.addEventListener('submit', onSubmit);
+    formElement.querySelector('.edit-form').addEventListener('submit', onSubmit);
 
     const submitButton = formElement.querySelector('.edit-form__submit');
     inputs.forEach((input) => submitButton.parentElement.insertBefore(input, submitButton));
