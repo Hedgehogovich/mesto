@@ -37,15 +37,15 @@
 
   const editProfilePopup = root.querySelector('.profile-popup')
   const editProfileForm = editProfilePopup.querySelector('.profile-popup__form')
-  const profileNameInput = editProfileForm.querySelector('.profile-form__input_type_name');
-  const profileJobInput = editProfileForm.querySelector('.profile-form__input_type_job');
+  const profileNameInput = editProfileForm.querySelector('.profile-popup__input_type_name');
+  const profileJobInput = editProfileForm.querySelector('.profile-popup__input_type_job');
 
   const addPlaceButton = root.querySelector('.profile__add');
 
   const newPlacePopup = root.querySelector('.place-popup')
   const newPlaceForm = newPlacePopup.querySelector('.place-popup__form')
-  const newPlaceNameInput = newPlaceForm.querySelector('.place-form__input_type_name');
-  const newPlacePictureInput = newPlaceForm.querySelector('.place-form__input_type_picture');
+  const newPlaceNameInput = newPlaceForm.querySelector('.place-popup__input_type_name');
+  const newPlacePictureInput = newPlaceForm.querySelector('.place-popup__input_type_picture');
 
   const zoomPreviewPopup = root.querySelector('.zoom-preview');
   const zoomPreviewPopupImage = zoomPreviewPopup.querySelector('.zoom-preview__image');
