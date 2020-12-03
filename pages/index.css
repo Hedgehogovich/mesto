@@ -35,6 +35,7 @@
 
 @import url('../blocks/popup/popup.css');
 @import url('../blocks/popup/_opened/popup_opened.css');
+@import url('../blocks/popup/_closing/popup_closing.css');
 @import url('../blocks/popup/__container/popup__container.css');
 @import url('../blocks/popup/__close/popup__close.css');
 
@@ -43,4 +44,4 @@
 @import url('../blocks/edit-form/__input/edit-form__input.css');
 @import url('../blocks/edit-form/__submit/edit-form__submit.css');
 
-@import url('../blocks/zoom-preview/zoom-preview.css');
+@import url('../blocks/zoom-preview/__image/zoom-preview__image.css');

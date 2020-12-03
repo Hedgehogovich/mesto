@@ -29,33 +29,42 @@
   const root = document.querySelector('.root');
   const galleryGrid = root.querySelector('.gallery__grid');
 
-  const popup = root.querySelector('.popup');
-  const popupContainer = popup.querySelector('.popup__container');
-  const popupCloseButton = popup.querySelector('.popup__close');
+  const popupCloseButtons = root.querySelectorAll('.popup__close');
 
   const editProfileButton = root.querySelector('.profile__edit');
   const profileNameElement = root.querySelector('.profile__name');
   const profileJobElement = root.querySelector('.profile__job');
 
+  const editProfilePopup = root.querySelector('.profile-popup')
+  const editProfileForm = editProfilePopup.querySelector('.profile-popup__form')
+  const profileNameInput = editProfileForm.querySelector('.profile-form__input_type_name');
+  const profileJobInput = editProfileForm.querySelector('.profile-form__input_type_job');
+
   const addPlaceButton = root.querySelector('.profile__add');
 
+  const newPlacePopup = root.querySelector('.place-popup')
+  const newPlaceForm = newPlacePopup.querySelector('.place-popup__form')
+  const newPlaceNameInput = newPlaceForm.querySelector('.place-form__input_type_name');
+  const newPlacePictureInput = newPlaceForm.querySelector('.place-form__input_type_picture');
+
+  const zoomPreviewPopup = root.querySelector('.zoom-preview');
+  const zoomPreviewPopupImage = zoomPreviewPopup.querySelector('.zoom-preview__image');
+
   const cardTemplate = root.querySelector('#gallery-card').content;
-  const formTemplate = root.querySelector('#edit-form').content;
 
-  const editFormInputClass = 'edit-form__input'
-
-  function showPopup(innerPopupElement) {
-    popupContainer.append(innerPopupElement);
-
+  function showPopup(popupElement) {
     root.classList.add('root_opened');
-    popup.classList.add('popup_opened');
+    popupElement.classList.add('popup_opened');
   }
 
-  function closePopup() {
-    popup.classList.remove('popup_opened');
-    root.classList.remove('root_opened');
+  function closePopup(popupElement) {
+    popupElement.classList.add('popup_closing');
+    popupElement.classList.remove('popup_opened');
 
-    popupContainer.lastElementChild.remove();
+    popupElement.addEventListener('transitionend', () => {
+      popupElement.classList.remove('popup_closing');
+      root.classList.remove('root_opened');
+    });
   }
 
   function onLikeButtonClick(evt) {
@@ -65,12 +74,10 @@
   function onPictureClick(evt) {
     const {target: img} = evt;
 
-    const zoomImage = document.createElement('img');
-    zoomImage.classList.add('zoom-preview');
-    zoomImage.src = img.src;
-    zoomImage.alt = img.alt;
+    zoomPreviewPopupImage.src = img.src;
+    zoomPreviewPopupImage.alt = img.alt;
 
-    showPopup(zoomImage);
+    showPopup(zoomPreviewPopup);
   }
 
   function onDeleteButtonClick(evt) {
@@ -96,34 +103,6 @@
     return gridElement;
   }
 
-  function createPopupFormInput(name, defaultValue = '', placeholder = '') {
-    const input = document.createElement('input');
-
-    input.classList.add(editFormInputClass);
-    input.type = 'text';
-    input.name = name;
-    if (placeholder) {
-      input.placeholder = placeholder;
-    }
-    if (defaultValue) {
-      input.value = defaultValue;
-    }
-
-    return input;
-  }
-
-  function createPopupForm(name, heading, inputs, onSubmit) {
-    const formElement = formTemplate.cloneNode(true);
-
-    formElement.querySelector('.edit-form__title').textContent = heading;
-    formElement.querySelector('.edit-form').addEventListener('submit', onSubmit);
-
-    const submitButton = formElement.querySelector('.edit-form__submit');
-    inputs.forEach((input) => submitButton.parentElement.insertBefore(input, submitButton));
-
-    return formElement;
-  }
-
   function getElementTextContent(element) {
     return element.textContent.trim();
   }
@@ -134,39 +113,35 @@
 
   function onProfileFormSubmit(evt) {
     evt.preventDefault();
-    const {target: form} = evt;
 
-    profileNameElement.textContent = getInputElementValue(form.querySelector(`.${editFormInputClass}[name="name"]`));
-    profileJobElement.textContent = getInputElementValue(form.querySelector(`.${editFormInputClass}[name="job"]`));
+    profileNameElement.textContent = getInputElementValue(profileNameInput);
+    profileJobElement.textContent = getInputElementValue(profileJobInput);
 
-    closePopup();
+    closePopup(editProfilePopup);
   }
 
   function onProfileEditButtonClick() {
-    const nameInput = createPopupFormInput('name', getElementTextContent(profileNameElement));
-    const jobInput = createPopupFormInput('job', getElementTextContent(profileJobElement));
-    const form = createPopupForm('profile', 'Редактировать профиль', [nameInput, jobInput], onProfileFormSubmit);
+    profileNameInput.value = getElementTextContent(profileNameElement);
+    profileJobInput.value = getElementTextContent(profileJobElement);
 
-    showPopup(form);
+    showPopup(editProfilePopup);
   }
 
   function onNewPlaceFormSubmit(evt) {
     evt.preventDefault();
-    const {currentTarget: form} = evt;
 
-    const name = getInputElementValue(form.querySelector(`.${editFormInputClass}[name="place-name"]`));
-    const link = getInputElementValue(form.querySelector(`.${editFormInputClass}[name="picture"]`));
+    const name = getInputElementValue(newPlaceNameInput);
+    const link = getInputElementValue(newPlacePictureInput);
 
     galleryGrid.prepend(createCardElement({name, link}));
-    closePopup();
+    closePopup(newPlacePopup);
   }
 
   function onNewPlaceButtonClick() {
-    const placeNameInput = createPopupFormInput('place-name', '', 'Название');
-    const pictureInput = createPopupFormInput('picture', '', 'Ссылка на картинку');
-    const form = createPopupForm('new-place', 'Новое место', [placeNameInput, pictureInput], onNewPlaceFormSubmit);
+    newPlaceNameInput.value = '';
+    newPlacePictureInput.value = '';
 
-    showPopup(form);
+    showPopup(newPlacePopup);
   }
 
   function addInitialCardsToGrid() {
@@ -177,7 +152,13 @@
 
   editProfileButton.addEventListener('click', onProfileEditButtonClick);
   addPlaceButton.addEventListener('click', onNewPlaceButtonClick);
-  popupCloseButton.addEventListener('click', closePopup);
+  editProfileForm.addEventListener('submit', onProfileFormSubmit);
+  newPlaceForm.addEventListener('submit', onNewPlaceFormSubmit);
+  [...popupCloseButtons].forEach(button => {
+    button.addEventListener('click', evt => {
+      closePopup(evt.target.closest('.popup'));
+    });
+  });
 
   addInitialCardsToGrid();
 })(document);
