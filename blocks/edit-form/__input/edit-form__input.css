@@ -2,7 +2,7 @@
   display: block;
   width: 100%;
 
-  margin-bottom: 26px;
+  margin-bottom: 5px;
   padding-bottom: 11px;
 
   border: none;
@@ -30,14 +30,4 @@
 
 .edit-form__input::placeholder {
   color: #c4c4c4;
-}
-
-.edit-form__input:last-of-type {
-  margin-bottom: 48px;
-}
-
-@media screen and (max-width: 540px) {
-  .edit-form__input:last-of-type {
-    margin-bottom: 45px;
-  }
 }

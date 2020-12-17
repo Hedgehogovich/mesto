@@ -57,13 +57,37 @@
   </footer>
 </div>
 <div class="popup profile-popup">
-  <div class="popup__container">
-    <form name="profile" class="edit-form profile-popup__form">
+  <div class="popup__container popup__container_form">
+    <form name="profile" class="edit-form profile-popup__form" novalidate>
       <h2 class="edit-form__title">
         Редактировать профиль
       </h2>
-      <input type="text" name="name" class="edit-form__input profile-popup__input profile-popup__input_type_name">
-      <input type="text" name="job" class="edit-form__input profile-popup__input profile-popup__input_type_job">
+      <label for="name" class="edit-form__field">
+        <input
+          id="name"
+          type="text"
+          name="name"
+          class="edit-form__input profile-popup__input profile-popup__input_type_name"
+          required
+          minlength="2"
+          maxlength="40"
+          aria-describedby="name-error"
+        >
+        <span id="name-error" class="edit-form__error name-error"></span>
+      </label>
+      <label for="job" class="edit-form__field">
+        <input
+          id="job"
+          type="text"
+          name="job"
+          class="edit-form__input profile-popup__input profile-popup__input_type_job"
+          required
+          minlength="2"
+          maxlength="200"
+          aria-describedby="job-error"
+        >
+        <span id="job-error" class="edit-form__error job-error"></span>
+      </label>
       <button class="edit-form__submit" type="submit">
         Сохранить
       </button>
@@ -72,13 +96,37 @@
   </div>
 </div>
 <div class="popup place-popup">
-  <div class="popup__container">
-    <form name="new-place" class="edit-form place-popup__form">
+  <div class="popup__container popup__container_form">
+    <form name="new-place" class="edit-form place-popup__form" novalidate>
       <h2 class="edit-form__title">
         Новое место
       </h2>
-      <input type="text" name="place-name" placeholder="Название" class="edit-form__input place-popup__input place-popup__input_type_name">
-      <input type="text" name="picture" placeholder="Ссылка на картинку" class="edit-form__input place-popup__input place-popup__input_type_picture">
+      <label for="place-name" class="edit-form__field">
+        <input
+          id="place-name"
+          type="text"
+          name="place-name"
+          placeholder="Название"
+          class="edit-form__input place-popup__input place-popup__input_type_name"
+          required
+          minlength="2"
+          maxlength="30"
+          aria-describedby="place-name-error"
+        >
+        <span id="place-name-error" class="edit-form__error place-name-error"></span>
+      </label>
+      <label for="picture" class="edit-form__field">
+        <input
+          id="picture"
+          type="url"
+          name="picture"
+          placeholder="Ссылка на картинку"
+          class="edit-form__input place-popup__input place-popup__input_type_picture"
+          required
+          aria-describedby="picture-error"
+        >
+        <span id="picture-error" class="edit-form__error picture-error"></span>
+      </label>
       <button class="edit-form__submit" type="submit">
         Сохранить
       </button>
@@ -105,5 +153,6 @@
   </figure>
 </template>
 <script src="./scripts/index.js"></script>
+<script src="./scripts/validate.js"></script>
 </body>
 </html>
