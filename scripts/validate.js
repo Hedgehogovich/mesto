@@ -1,14 +1,10 @@
-function hasInvalidInput(inputList) {
-  return inputList.some(input => !input.validity.valid);
-}
-
-function toggleButtonState(inputList, buttonElement, inactiveButtonClass) {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(inactiveButtonClass);
-    buttonElement.disabled = true;
-  } else {
+function toggleButtonState(formElement, buttonElement, inactiveButtonClass) {
+  if (formElement.checkValidity()) {
     buttonElement.classList.remove(inactiveButtonClass);
     buttonElement.disabled = false;
+  } else {
+    buttonElement.classList.add(inactiveButtonClass);
+    buttonElement.disabled = true;
   }
 }
 
@@ -51,7 +47,7 @@ function enableValidation({
     const buttonElement = formElement.querySelector(submitButtonSelector);
 
     formElement.addEventListener('submit', evt => {
-      if (hasInvalidInput(inputList)) {
+      if (!formElement.checkValidity()) {
         evt.preventDefault();
       }
     });
@@ -59,10 +55,10 @@ function enableValidation({
     inputList.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
         checkInputValidity(inputElement, inputErrorClass, formElement, errorClass);
-        toggleButtonState(inputList, buttonElement, inactiveButtonClass);
+        toggleButtonState(formElement, buttonElement, inactiveButtonClass);
       });
     });
-    toggleButtonState(inputList, buttonElement, inactiveButtonClass);
+    toggleButtonState(formElement, buttonElement, inactiveButtonClass);
   });
 }
 
