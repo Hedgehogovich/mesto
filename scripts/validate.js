@@ -46,12 +46,6 @@ function enableValidation({
     const inputList = Array.from(formElement.querySelectorAll(inputSelector));
     const buttonElement = formElement.querySelector(submitButtonSelector);
 
-    formElement.addEventListener('submit', evt => {
-      if (!formElement.checkValidity()) {
-        evt.preventDefault();
-      }
-    });
-
     inputList.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
         checkInputValidity(inputElement, inputErrorClass, formElement, errorClass);
