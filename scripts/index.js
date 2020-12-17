@@ -93,13 +93,14 @@ function onProfileFormSubmit(evt) {
   closePopup(editProfilePopup);
 }
 
-function updateProfileFormInputs() {
+function onProfileEditButtonClick() {
   profileNameInput.value = getElementTextContent(profileNameElement);
   profileJobInput.value = getElementTextContent(profileJobElement);
-}
+  // перед показом попапа требуется валидация полей для того,
+  // чтобы сделать активной кнопку сабмита
+  profileNameInput.dispatchEvent(new Event('input'));
+  profileJobInput.dispatchEvent(new Event('input'));
 
-function onProfileEditButtonClick() {
-  updateProfileFormInputs();
   showPopup(editProfilePopup);
 }
 
@@ -177,8 +178,6 @@ function addPopupCloseListeners() {
 }
 
 editProfileButton.addEventListener('click', onProfileEditButtonClick);
-updateProfileFormInputs();
-
 addPlaceButton.addEventListener('click', onNewPlaceButtonClick);
 editProfileForm.addEventListener('submit', onProfileFormSubmit);
 newPlaceForm.addEventListener('submit', onNewPlaceFormSubmit);
