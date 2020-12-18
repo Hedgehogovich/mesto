@@ -19,6 +19,7 @@ const newPlacePictureInput = newPlaceForm.querySelector('.place-popup__input_typ
 
 const zoomPreviewPopup = root.querySelector('.zoom-preview');
 const zoomPreviewPopupImage = zoomPreviewPopup.querySelector('.zoom-preview__image');
+const zoomPreviewPopupCaption = zoomPreviewPopup.querySelector('.zoom-preview__caption');
 
 const cardTemplate = root.querySelector('#gallery-card').content;
 
@@ -49,6 +50,7 @@ function onPictureClick(evt) {
 
   zoomPreviewPopupImage.src = img.src;
   zoomPreviewPopupImage.alt = img.alt;
+  zoomPreviewPopupCaption.textContent = img.alt;
 
   showPopup(zoomPreviewPopup);
 }
@@ -96,11 +98,7 @@ function onProfileFormSubmit(evt) {
 function onProfileEditButtonClick() {
   profileNameInput.value = getElementTextContent(profileNameElement);
   profileJobInput.value = getElementTextContent(profileJobElement);
-  // перед показом попапа требуется валидация полей для того,
-  // чтобы сделать активной кнопку сабмита и ресетать возможные
-  // ошибки валидации после закрытия попапа без сохранения данных
-  profileNameInput.dispatchEvent(new Event('input'));
-  profileJobInput.dispatchEvent(new Event('input'));
+  resetFormValidation(editProfileForm);
 
   showPopup(editProfilePopup);
 }
@@ -118,6 +116,7 @@ function onNewPlaceFormSubmit(evt) {
 function onNewPlaceButtonClick() {
   newPlaceNameInput.value = '';
   newPlacePictureInput.value = '';
+  resetFormValidation(newPlaceForm);
 
   showPopup(newPlacePopup);
 }

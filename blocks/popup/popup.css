@@ -20,7 +20,5 @@
   padding-left: 19px;
   padding-right: 19px;
 
-  background-color: rgba(0, 0, 0, .5);
-
   transition: visibility 0s linear .5s, opacity .5s linear;
 }
