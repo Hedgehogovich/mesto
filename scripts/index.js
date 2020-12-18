@@ -97,7 +97,8 @@ function onProfileEditButtonClick() {
   profileNameInput.value = getElementTextContent(profileNameElement);
   profileJobInput.value = getElementTextContent(profileJobElement);
   // перед показом попапа требуется валидация полей для того,
-  // чтобы сделать активной кнопку сабмита
+  // чтобы сделать активной кнопку сабмита и ресетать возможные
+  // ошибки валидации после закрытия попапа без сохранения данных
   profileNameInput.dispatchEvent(new Event('input'));
   profileJobInput.dispatchEvent(new Event('input'));
 
