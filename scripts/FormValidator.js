@@ -1,62 +1,57 @@
 export class FormValidator {
-  #config;
-  #form;
-  #button;
-  #inputsList;
-
   constructor(config, form) {
-    this.#config = config;
-    this.#form = form;
-    this.#inputsList = form.querySelectorAll(config.inputSelector);
-    this.#button = form.querySelector(config.submitButtonSelector);
+    this._config = config;
+    this._form = form;
+    this._inputsList = form.querySelectorAll(config.inputSelector);
+    this._button = form.querySelector(config.submitButtonSelector);
   }
 
-  #toggleButtonState() {
-    if (this.#form.checkValidity()) {
-      this.#button.classList.remove(this.#config.inactiveButtonClass);
-      this.#button.disabled = false;
+  _toggleButtonState() {
+    if (this._form.checkValidity()) {
+      this._button.classList.remove(this._config.inactiveButtonClass);
+      this._button.disabled = false;
     } else {
-      this.#button.classList.add(this.#config.inactiveButtonClass);
-      this.#button.disabled = true;
+      this._button.classList.add(this._config.inactiveButtonClass);
+      this._button.disabled = true;
     }
   }
 
-  #showInputError(inputElement) {
-    inputElement.classList.add(this.#config.inputErrorClass);
+  _showInputError(inputElement) {
+    inputElement.classList.add(this._config.inputErrorClass);
 
-    const error = this.#form.querySelector(`#${inputElement.id}-error`);
+    const error = this._form.querySelector(`#${inputElement.id}-error`);
     error.textContent = inputElement.validationMessage;
-    error.classList.add(this.#config.errorClass);
+    error.classList.add(this._config.errorClass);
   }
 
-  #hideInputError(inputElement) {
-    inputElement.classList.remove(this.#config.inputErrorClass);
+  _hideInputError(inputElement) {
+    inputElement.classList.remove(this._config.inputErrorClass);
 
-    const error = this.#form.querySelector(`#${inputElement.id}-error`);
-    error.classList.remove(this.#config.errorClass);
+    const error = this._form.querySelector(`#${inputElement.id}-error`);
+    error.classList.remove(this._config.errorClass);
     error.textContent = '';
   }
 
-  #checkInputValidity(inputElement) {
+  _checkInputValidity(inputElement) {
     if (inputElement.validity.valid) {
-      this.#hideInputError(inputElement);
+      this._hideInputError(inputElement);
     } else {
-      this.#showInputError(inputElement);
+      this._showInputError(inputElement);
     }
   }
 
   resetForm() {
-    this.#inputsList.forEach(inputElement => this.#hideInputError(inputElement));
-    this.#toggleButtonState();
+    this._inputsList.forEach(inputElement => this._hideInputError(inputElement));
+    this._toggleButtonState();
   }
 
   enableValidation() {
-    this.#inputsList.forEach(inputElement => {
+    this._inputsList.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
-        this.#checkInputValidity(inputElement);
-        this.#toggleButtonState();
+        this._checkInputValidity(inputElement);
+        this._toggleButtonState();
       });
     });
-    this.#toggleButtonState();
+    this._toggleButtonState();
   }
 }

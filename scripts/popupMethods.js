@@ -1,8 +1,8 @@
-const root = document.querySelector('.root');
+import {rootElement} from './rootElement.js';
 
-function onEscapeClick(evt) {
-  if (evt.key === 'Escape') {
-    closePopup(root.querySelector('.popup_opened'));
+function onEscapeClick({key}) {
+  if (key === 'Escape') {
+    closePopup(rootElement.querySelector('.popup_opened'));
   }
 }
 
@@ -21,7 +21,7 @@ function addPopupBackgroundListener(popup) {
 }
 
 export function showPopup(popupElement) {
-  root.classList.add('root_opened');
+  rootElement.classList.add('root_opened');
   popupElement.classList.add('popup_opened');
   document.addEventListener('keyup', onEscapeClick);
 }
@@ -29,11 +29,11 @@ export function showPopup(popupElement) {
 export function closePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
   document.removeEventListener('keyup', onEscapeClick);
-  root.classList.remove('root_opened');
+  rootElement.classList.remove('root_opened');
 }
 
 export function addPopupCloseListeners() {
-  root.querySelectorAll('.popup').forEach(popup => {
+  rootElement.querySelectorAll('.popup').forEach(popup => {
     addPopupCloseButtonsListener(popup);
     addPopupBackgroundListener(popup);
   });

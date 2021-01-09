@@ -1,23 +1,20 @@
 import {showPopup} from './popupMethods.js';
 
 export class Card {
-  #cardData;
-  #template;
-
   constructor(cardData, template) {
-    this.#cardData = cardData;
-    this.#template = template;
+    this._cardData = cardData;
+    this._template = template;
   }
 
-  static #onLikeButtonClick({target}) {
+  _onLikeButtonClick({target}) {
     target.classList.toggle('gallery__card-like_active');
   }
 
-  static #onDeleteButtonClick({target}) {
+  _onDeleteButtonClick({target}) {
     target.closest('.gallery__grid-item').remove();
   }
 
-  static #onPictureClick(evt) {
+  _onPictureClick(evt) {
     const {target: img} = evt;
 
     const zoomPreviewPopup = document.querySelector('.zoom-preview');
@@ -31,21 +28,39 @@ export class Card {
     showPopup(zoomPreviewPopup);
   }
 
+  _setCardName() {
+    this._element.querySelector('.gallery__card-name').textContent = this._cardData.name;
+  }
+
+  _setEventListeners() {
+    this._element.querySelector('.gallery__card-like').addEventListener('click', evt => {
+      this._onLikeButtonClick(evt);
+    });
+    this._element.querySelector('.gallery__card-delete').addEventListener('click', evt => {
+      this._onDeleteButtonClick(evt);
+    });
+  }
+
+  _setCardImage() {
+    const cardImage = this._element.querySelector('.gallery__card-image');
+
+    cardImage.src = this._cardData.link;
+    cardImage.alt = this._cardData.name;
+    cardImage.addEventListener('click', evt => {
+      this._onPictureClick(evt);
+    });
+  }
+
   getElement() {
-    const cardElement = this.#template.cloneNode(true);
+    this._element = this._template.cloneNode(true);
 
-    cardElement.querySelector('.gallery__card-name').textContent = this.#cardData.name;
-    cardElement.querySelector('.gallery__card-like').addEventListener('click', Card.#onLikeButtonClick);
-    cardElement.querySelector('.gallery__card-delete').addEventListener('click', Card.#onDeleteButtonClick);
-
-    const cardImage = cardElement.querySelector('.gallery__card-image');
-    cardImage.src = this.#cardData.link;
-    cardImage.alt = this.#cardData.name;
-    cardImage.addEventListener('click', Card.#onPictureClick);
+    this._setCardName();
+    this._setEventListeners();
+    this._setCardImage();
 
     const gridElement = document.createElement('li');
     gridElement.classList.add('gallery__grid-item');
-    gridElement.append(cardElement);
+    gridElement.append(this._element);
 
     return gridElement;
   }

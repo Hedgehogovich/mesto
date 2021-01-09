@@ -1,5 +1,6 @@
 import {FormValidator} from './FormValidator.js';
 import {Card} from './Card.js';
+import {rootElement} from './rootElement.js';
 
 import {showPopup, closePopup, addPopupCloseListeners} from './popupMethods.js';
 
@@ -11,28 +12,27 @@ const validationConfig = {
   errorClass: 'edit-form__error_visible'
 };
 
-const root = document.querySelector('.root');
-const galleryGrid = root.querySelector('.gallery__grid');
+const galleryGrid = rootElement.querySelector('.gallery__grid');
 
-const editProfileButton = root.querySelector('.profile__edit');
-const profileNameElement = root.querySelector('.profile__name');
-const profileJobElement = root.querySelector('.profile__job');
+const editProfileButton = rootElement.querySelector('.profile__edit');
+const profileNameElement = rootElement.querySelector('.profile__name');
+const profileJobElement = rootElement.querySelector('.profile__job');
 
-const editProfilePopup = root.querySelector('.profile-popup');
+const editProfilePopup = rootElement.querySelector('.profile-popup');
 const editProfileForm = editProfilePopup.querySelector('.profile-popup__form');
 const editProfileValidation = new FormValidator(validationConfig, editProfileForm);
 const profileNameInput = editProfileForm.querySelector('.profile-popup__input_type_name');
 const profileJobInput = editProfileForm.querySelector('.profile-popup__input_type_job');
 
-const addPlaceButton = root.querySelector('.profile__add');
+const addPlaceButton = rootElement.querySelector('.profile__add');
 
-const newPlacePopup = root.querySelector('.place-popup');
+const newPlacePopup = rootElement.querySelector('.place-popup');
 const newPlaceForm = newPlacePopup.querySelector('.place-popup__form');
 const newPlaceValidation = new FormValidator(validationConfig, newPlaceForm);
 const newPlaceNameInput = newPlaceForm.querySelector('.place-popup__input_type_name');
 const newPlacePictureInput = newPlaceForm.querySelector('.place-popup__input_type_picture');
 
-const cardTemplate = root.querySelector('#gallery-card').content;
+const cardTemplate = rootElement.querySelector('#gallery-card').content;
 
 function getElementTextContent(element) {
   return element.textContent.trim();
