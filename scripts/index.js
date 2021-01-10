@@ -1,8 +1,5 @@
 import {FormValidator} from './FormValidator.js';
 import {Card} from './Card.js';
-import {rootElement} from './rootElement.js';
-
-import {showPopup, closePopup, addPopupCloseListeners} from './popupMethods.js';
 
 const validationConfig = {
   inputSelector: '.edit-form__input',
@@ -11,6 +8,8 @@ const validationConfig = {
   inputErrorClass: 'edit-form__input_type_error',
   errorClass: 'edit-form__error_visible'
 };
+
+const rootElement = document.querySelector('.root')
 
 const galleryGrid = rootElement.querySelector('.gallery__grid');
 
@@ -32,7 +31,50 @@ const newPlaceValidation = new FormValidator(validationConfig, newPlaceForm);
 const newPlaceNameInput = newPlaceForm.querySelector('.place-popup__input_type_name');
 const newPlacePictureInput = newPlaceForm.querySelector('.place-popup__input_type_picture');
 
+const zoomPreviewPopup = rootElement.querySelector('.zoom-preview');
+const zoomPreviewPopupImage = zoomPreviewPopup.querySelector('.zoom-preview__image');
+const zoomPreviewPopupCaption = zoomPreviewPopup.querySelector('.zoom-preview__caption');
+
 const cardTemplate = rootElement.querySelector('#gallery-card').content;
+
+export function showPopup(popupElement) {
+  rootElement.classList.add('root_opened');
+  popupElement.classList.add('popup_opened');
+  document.addEventListener('keyup', onEscapeClick);
+}
+
+export function closePopup(popupElement) {
+  popupElement.classList.remove('popup_opened');
+  document.removeEventListener('keyup', onEscapeClick);
+  rootElement.classList.remove('root_opened');
+}
+
+function onEscapeClick({key}) {
+  if (key === 'Escape') {
+    closePopup(rootElement.querySelector('.popup_opened'));
+  }
+}
+
+function addPopupCloseButtonsListener(popup) {
+  const popupCloseButton = popup.querySelector('.popup__close');
+
+  popupCloseButton.addEventListener('click', () => closePopup(popup));
+}
+
+function addPopupBackgroundListener(popup) {
+  popup.addEventListener('click', ({target, currentTarget}) => {
+    if (target === currentTarget) {
+      closePopup(currentTarget);
+    }
+  });
+}
+
+export function addPopupCloseListeners() {
+  rootElement.querySelectorAll('.popup').forEach(popup => {
+    addPopupCloseButtonsListener(popup);
+    addPopupBackgroundListener(popup);
+  });
+}
 
 function getElementTextContent(element) {
   return element.textContent.trim();
@@ -59,13 +101,25 @@ function onProfileEditButtonClick() {
   showPopup(editProfilePopup);
 }
 
+function onPictureClick({link, name}) {
+  zoomPreviewPopupImage.src = link;
+  zoomPreviewPopupImage.alt = name;
+  zoomPreviewPopupCaption.textContent = name;
+
+  showPopup(zoomPreviewPopup);
+}
+
+function createCard(item) {
+  return new Card(item, cardTemplate, onPictureClick).getElement();
+}
+
 function onNewPlaceFormSubmit(evt) {
   evt.preventDefault();
 
   const name = getInputElementValue(newPlaceNameInput);
   const link = getInputElementValue(newPlacePictureInput);
 
-  galleryGrid.prepend(new Card({name, link}, cardTemplate).getElement());
+  galleryGrid.prepend(createCard({name, link}));
   closePopup(newPlacePopup);
 }
 
@@ -105,9 +159,7 @@ function addInitialCardsToGrid() {
     }
   ];
 
-  cards.forEach(card => {
-    galleryGrid.append(new Card(card, cardTemplate).getElement());
-  });
+  galleryGrid.append(...cards.map(card => createCard(card)));
 }
 
 editProfileButton.addEventListener('click', onProfileEditButtonClick);
