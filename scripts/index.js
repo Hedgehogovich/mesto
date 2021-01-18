@@ -159,7 +159,7 @@ function addInitialCardsToGrid() {
     }
   ];
 
-  galleryGrid.append(...cards.map(card => createCard(card)));
+  galleryGrid.append(...cards.map(createCard));
 }
 
 editProfileButton.addEventListener('click', onProfileEditButtonClick);
