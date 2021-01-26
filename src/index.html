@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Юрий Чачило">
+  <meta name="description" content="проектная работа к курсу номер 4">
+  <meta name="keywords" content="HTML,CSS,JS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Жак-Ив Кусто">
+  <meta property="og:description" content="Исследователь океана">
+  <meta property="og:image:secure_url" content="<%= require('./images/avatar.jpg') %>">
+  <meta property="og:image" content="<%= require('./images/avatar.jpg') %>">
+  <meta property="og:image:width" content="240">
+  <meta property="og:image:height" content="240">
+  <meta property="og:image:type" content="image/jpg">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@hedgehogovi4">
+  <meta name="twitter:title" content="Жак-Ив Кусто">
+  <meta name="twitter:description" content="Исследователь океана">
+  <meta name="twitter:image" content="https://hedgehogovich.github.io/mesto/images/avatar.jpg">
+  <meta name="twitter:image:alt" content="фото пользователя Жак-Ив Кусто">
+  <link rel="apple-touch-icon" sizes="180x180" href="<%= require('./images/favicon/apple-touch-icon.png') %>">
+  <link rel="icon" type="image/png" sizes="32x32" href="<%= require('./images/favicon/favicon-32x32.png') %>">
+  <link rel="icon" type="image/png" sizes="16x16" href="<%= require('./images/favicon/favicon-16x16.png') %>">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+<body class="root">
+<div class="page">
+  <header class="header page__header">
+    <div class="header__logo"></div>
+  </header>
+  <main class="content page__section page__content">
+    <section class="profile page__profile">
+      <div class="profile__user">
+        <img src="<%=require('./images/avatar.jpg')%>" alt="фото пользователя Жак-Ив Кусто" class="profile__avatar">
+        <div class="profile__info">
+          <h1 class="profile__name">
+            Жак-Ив Кусто
+          </h1>
+          <button type="button" class="profile__edit" aria-label="Редактировать профиль"></button>
+          <p class="profile__job">
+            Исследователь океана
+          </p>
+        </div>
+      </div>
+      <button type="button" class="profile__add" aria-label="Добавить изображение"></button>
+    </section>
+    <section class="gallery">
+      <ul class="gallery__grid"></ul>
+    </section>
+  </main>
+  <footer class="footer page__section">
+    <p class="footer__text">&copy; 2020 Mesto Russia</p>
+  </footer>
+</div>
+<div class="popup popup_background_dark profile-popup">
+  <div class="popup__container popup__container_form">
+    <form name="profile" class="edit-form profile-popup__form" novalidate>
+      <h2 class="edit-form__title">
+        Редактировать профиль
+      </h2>
+      <label for="name" class="edit-form__field">
+        <input
+          id="name"
+          type="text"
+          name="name"
+          class="edit-form__input profile-popup__input profile-popup__input_type_name"
+          required
+          minlength="2"
+          maxlength="40"
+          aria-describedby="name-error"
+        >
+        <span id="name-error" class="edit-form__error"></span>
+      </label>
+      <label for="job" class="edit-form__field">
+        <input
+          id="job"
+          type="text"
+          name="job"
+          class="edit-form__input profile-popup__input profile-popup__input_type_job"
+          required
+          minlength="2"
+          maxlength="200"
+          aria-describedby="job-error"
+        >
+        <span id="job-error" class="edit-form__error"></span>
+      </label>
+      <button class="edit-form__submit" type="submit">
+        Сохранить
+      </button>
+    </form>
+    <button type="button" class="popup__close" aria-label="Закрыть всплывающее окно"></button>
+  </div>
+</div>
+<div class="popup popup_background_dark place-popup">
+  <div class="popup__container popup__container_form">
+    <form name="new-place" class="edit-form place-popup__form" novalidate>
+      <h2 class="edit-form__title">
+        Новое место
+      </h2>
+      <label for="place-name" class="edit-form__field">
+        <input
+          id="place-name"
+          type="text"
+          name="name"
+          placeholder="Название"
+          class="edit-form__input place-popup__input place-popup__input_type_name"
+          required
+          minlength="2"
+          maxlength="30"
+          aria-describedby="place-name-error"
+        >
+        <span id="place-name-error" class="edit-form__error"></span>
+      </label>
+      <label for="picture" class="edit-form__field">
+        <input
+          id="picture"
+          type="url"
+          name="link"
+          placeholder="Ссылка на картинку"
+          class="edit-form__input place-popup__input place-popup__input_type_picture"
+          required
+          aria-describedby="picture-error"
+        >
+        <span id="picture-error" class="edit-form__error"></span>
+      </label>
+      <button class="edit-form__submit" type="submit">
+        Сохранить
+      </button>
+    </form>
+    <button type="button" class="popup__close" aria-label="Закрыть всплывающее окно"></button>
+  </div>
+</div>
+<div class="popup popup_background_black zoom-preview">
+  <div class="popup__container">
+    <figure class="zoom-preview__wrapper">
+      <img src="#" alt="#" class="zoom-preview__image">
+      <figcaption class="zoom-preview__caption"></figcaption>
+    </figure>
+    <button type="button" class="popup__close" aria-label="Закрыть всплывающее окно"></button>
+  </div>
+</div>
+<template id="gallery-card">
+  <li class="gallery__grid-item">
+    <figure class="gallery__card">
+      <img src="#" alt="#" class="gallery__card-image">
+      <button class="gallery__card-delete" type="button" aria-label="Удалить фотографию"></button>
+      <figcaption class="gallery__card-caption">
+        <h2 class="gallery__card-name"></h2>
+        <button
+          class="gallery__card-like"
+          type="button"
+          aria-label="Поставить отметку нравится для фотографии"
+        ></button>
+      </figcaption>
+    </figure>
+  </li>
+</template>
+</body>
+</html>
