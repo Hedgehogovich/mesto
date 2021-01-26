@@ -5,7 +5,7 @@
 
   padding: 0;
 
-  background: url('src/images/icons/edit.svg') no-repeat center / 10px;
+  background: url('~src/images/icons/edit.svg') no-repeat center / 10px;
   border: 1px solid #fff;
 
   cursor: pointer;

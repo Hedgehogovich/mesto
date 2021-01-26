@@ -1,4 +1,4 @@
-import './styles/index.css';
+import './index.css';
 
 import {
   addPlaceButton,
@@ -7,13 +7,13 @@ import {
   editProfileForm,
   newPlaceForm,
   validationConfig
-} from 'src/utils/constants';
-import FormValidator from './components/FormValidator.js';
-import Card from './components/Card.js';
-import Section from './components/Section.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import UserInfo from './components/UserInfo.js';
+} from '~src/utils/constants';
+import FormValidator from '~src/components/FormValidator.js';
+import Card from '~src/components/Card.js';
+import Section from '~src/components/Section.js';
+import PopupWithImage from '~src/components/PopupWithImage.js';
+import PopupWithForm from '~src/components/PopupWithForm.js';
+import UserInfo from '~src/components/UserInfo.js';
 
 const galleryGrid = new Section({items: cards, renderer: createCard}, '.gallery__grid');
 

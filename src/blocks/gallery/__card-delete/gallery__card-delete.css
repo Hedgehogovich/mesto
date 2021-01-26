@@ -8,7 +8,7 @@
 
   padding: 0;
 
-  background: transparent url('src/images/icons/delete.svg') no-repeat center / contain;
+  background: transparent url('~src/images/icons/delete.svg') no-repeat center / contain;
   border: none;
   cursor: pointer;
   /* невозможно увидеть на очень светлом/белом фоне, сделано как временное решение */
