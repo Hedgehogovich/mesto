@@ -1,13 +1,13 @@
+import {escapeButtonKey} from '~src/utils/constants';
+
 export default class Popup {
   constructor(popupSelector) {
     this._element = document.querySelector(popupSelector);
-    this._rootElement = document.querySelector('.root');
 
     this._escapeMethodBinding = this._handleEscClose.bind(this);
   }
 
   open() {
-    this._rootElement.classList.add('root_opened');
     this._element.classList.add('popup_opened');
     document.addEventListener('keyup', this._escapeMethodBinding);
   }
@@ -15,11 +15,10 @@ export default class Popup {
   close() {
     this._element.classList.remove('popup_opened');
     document.removeEventListener('keyup', this._escapeMethodBinding);
-    this._rootElement.classList.remove('root_opened');
   }
 
   _handleEscClose({key}) {
-    if (key === 'Escape') {
+    if (key === escapeButtonKey) {
       this.close();
     }
   }

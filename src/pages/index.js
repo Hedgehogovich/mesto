@@ -1,4 +1,4 @@
-import './index.css';
+import '~src/pages/index.css';
 
 import {
   addPlaceButton,

@@ -39,4 +39,14 @@ const editProfileForm = document.querySelector('.profile-popup__form');
 const addPlaceButton = document.querySelector('.profile__add');
 const newPlaceForm = document.querySelector('.place-popup__form');
 
-export {validationConfig, cards, editProfileButton, editProfileForm, addPlaceButton, newPlaceForm};
+const escapeButtonKey = 'Escape';
+
+export {
+  validationConfig,
+  cards,
+  editProfileButton,
+  editProfileForm,
+  addPlaceButton,
+  newPlaceForm,
+  escapeButtonKey
+};
