@@ -41,4 +41,10 @@ export default class Api {
       action: '/users/me'
     }).then(this._getJsonFromResponse);
   }
+
+  getCards() {
+    return this._makeRequest({
+      action: '/cards',
+    }).then(this._getJsonFromResponse);
+  }
 }

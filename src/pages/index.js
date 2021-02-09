@@ -2,7 +2,6 @@ import '~src/pages/index.css';
 
 import {
   addPlaceButton,
-  cards,
   editProfileButton,
   editProfileForm,
   newPlaceForm,
@@ -19,7 +18,7 @@ import UserInfo from '~src/components/UserInfo.js';
 
 const api = new Api();
 
-const galleryGrid = new Section({items: cards, renderer: createCard}, '.gallery__grid');
+const galleryGrid = new Section({renderer: createCard}, '.gallery__grid');
 
 const editProfileValidation = new FormValidator(validationConfig, editProfileForm);
 const newPlaceValidation = new FormValidator(validationConfig, newPlaceForm);
@@ -70,10 +69,15 @@ function initializeUserProfile() {
     .then(authorizedUserInfo => userInfo.setUserInfo(authorizedUserInfo));
 }
 
+function getCards() {
+  api.getCards()
+    .then(cards => cards.forEach(card => galleryGrid.addItem(createCard(card))));
+}
+
 editProfileButton.addEventListener('click', onProfileEditButtonClick);
 addPlaceButton.addEventListener('click', onNewPlaceButtonClick);
 
 initializeUserProfile();
+getCards();
 editProfileValidation.enableValidation();
 newPlaceValidation.enableValidation();
-galleryGrid.renderElements();
