@@ -1,4 +1,4 @@
-.gallery__card-delete {
+.card__delete {
   width: 18px;
   height: 20px;
 
@@ -17,6 +17,6 @@
   transition: opacity .1s linear;
 }
 
-.gallery__card-delete:hover {
+.card__delete:hover {
   opacity: .6;
 }

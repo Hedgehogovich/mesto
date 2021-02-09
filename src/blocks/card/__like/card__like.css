@@ -1,9 +1,10 @@
-.gallery__card-like {
+.card__like {
   width: 21px;
   height: 19px;
   flex-shrink: 0;
 
   padding: 0;
+  margin-bottom: 3px;
 
   background: transparent url('~src/images/icons/heart.svg') no-repeat center / contain;
   border: none;
@@ -12,6 +13,6 @@
   transition: opacity .1s linear;
 }
 
-.gallery__card-like:hover {
+.card__like:hover {
   opacity: .6;
 }
