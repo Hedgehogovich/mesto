@@ -31,7 +31,13 @@ zoomPreviewPopup.setEventListeners();
 const newPlacePopup = new PopupWithForm('.place-popup', onNewPlaceFormSubmit);
 newPlacePopup.setEventListeners();
 
-const editProfilePopup = new PopupWithForm('.profile-popup', onProfileFormSubmit);
+const editProfilePopup = new PopupWithForm('.profile-popup', profileData => {
+  api.updateProfile(profileData)
+    .then(updatedProfileData => {
+      userInfo.setUserInfo(updatedProfileData);
+      editProfilePopup.close();
+    });
+});
 editProfilePopup.setEventListeners();
 
 const userInfo = new UserInfo({
@@ -42,11 +48,6 @@ const userInfo = new UserInfo({
 
 function createCard(item) {
   return new Card(item, cardTemplate, zoomPreviewPopup.open.bind(zoomPreviewPopup)).getElement();
-}
-
-function onProfileFormSubmit(profileData) {
-  userInfo.setUserInfo(profileData);
-  editProfilePopup.close();
 }
 
 function onNewPlaceFormSubmit({name, link}) {
