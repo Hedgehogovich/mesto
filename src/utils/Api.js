@@ -3,7 +3,11 @@ export default class Api {
     this._url = 'https://mesto.nomoreparties.co/v1/cohort-20';
   }
 
-  _makeRequest({action, method = 'GET', data = null}) {
+  _makeRequest({
+    action,
+    method = 'GET',
+    data = null,
+  }) {
     if (!action) {
       return Promise.reject('Не передано адреса запроса');
     }
@@ -11,7 +15,7 @@ export default class Api {
     const requestParams = {
       method,
       headers: {
-        authorization: 'ae67ccb6-ec53-41ab-bfce-d685e4f66069'
+        authorization: 'ae67ccb6-ec53-41ab-bfce-d685e4f66069',
       },
     };
 
@@ -22,6 +26,7 @@ export default class Api {
         url += new URLSearchParams(data).toString();
       } else {
         requestParams.body = JSON.stringify(data);
+        requestParams.headers['Content-Type'] = 'application/json';
       }
     }
 
@@ -45,6 +50,14 @@ export default class Api {
   getCards() {
     return this._makeRequest({
       action: '/cards',
+    }).then(this._getJsonFromResponse);
+  }
+
+  updateProfile({name, about}) {
+    return this._makeRequest({
+      action: '/users/me',
+      method: 'PATCH',
+      data: {name, about},
     }).then(this._getJsonFromResponse);
   }
 }
