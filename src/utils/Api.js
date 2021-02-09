@@ -60,4 +60,12 @@ export default class Api {
       data: {name, about},
     }).then(this._getJsonFromResponse);
   }
+
+  addCard({name, link}) {
+    return this._makeRequest({
+      action: '/cards',
+      method: 'POST',
+      data: {name, link},
+    }).then(this._getJsonFromResponse);
+  }
 }
