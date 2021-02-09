@@ -28,7 +28,12 @@ const cardTemplate = document.querySelector('#gallery-card').content;
 const zoomPreviewPopup = new PopupWithImage('.zoom-preview');
 zoomPreviewPopup.setEventListeners();
 
-const newPlacePopup = new PopupWithForm('.place-popup', onNewPlaceFormSubmit);
+const newPlacePopup = new PopupWithForm('.place-popup', cardData => {
+  api.addCard(cardData).then(createdCardData => {
+    galleryGrid.addItem(createCard(createdCardData));
+    newPlacePopup.close();
+  });
+});
 newPlacePopup.setEventListeners();
 
 const editProfilePopup = new PopupWithForm('.profile-popup', profileData => {
@@ -50,11 +55,6 @@ function createCard(item) {
   return new Card(item, cardTemplate, zoomPreviewPopup.open.bind(zoomPreviewPopup)).getElement();
 }
 
-function onNewPlaceFormSubmit({name, link}) {
-  galleryGrid.addItem(createCard({name, link}));
-  newPlacePopup.close();
-}
-
 function onProfileEditButtonClick() {
   editProfilePopup.open(userInfo.getUserInfo());
   editProfileValidation.resetForm();
@@ -72,7 +72,7 @@ function initializeUserProfile() {
 
 function getCards() {
   api.getCards()
-    .then(cards => cards.forEach(card => galleryGrid.addItem(createCard(card))));
+    .then(cards => cards.reverse().forEach(card => galleryGrid.addItem(createCard(card))));
 }
 
 editProfileButton.addEventListener('click', onProfileEditButtonClick);
