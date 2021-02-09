@@ -6,7 +6,7 @@ export default class Card {
   }
 
   _onLikeButtonClick({target}) {
-    target.classList.toggle('gallery__card-like_active');
+    target.classList.toggle('card__like_active');
   }
 
   _onDeleteButtonClick({target}) {
@@ -14,20 +14,24 @@ export default class Card {
   }
 
   _setCardName() {
-    this._element.querySelector('.gallery__card-name').textContent = this._cardData.name;
+    this._element.querySelector('.card__name').textContent = this._cardData.name;
+  }
+
+  _setCardLikesCount() {
+    this._element.querySelector('.card__likes-count').textContent = this._cardData.likes.length;
   }
 
   _setEventListeners() {
     this._element
-      .querySelector('.gallery__card-like')
+      .querySelector('.card__like')
       .addEventListener('click', this._onLikeButtonClick);
     this._element
-      .querySelector('.gallery__card-delete')
+      .querySelector('.card__delete')
       .addEventListener('click', this._onDeleteButtonClick);
   }
 
   _setCardImage() {
-    const cardImage = this._element.querySelector('.gallery__card-image');
+    const cardImage = this._element.querySelector('.card__image');
 
     cardImage.src = this._cardData.link;
     cardImage.alt = this._cardData.name;
@@ -40,6 +44,7 @@ export default class Card {
     this._setCardName();
     this._setEventListeners();
     this._setCardImage();
+    this._setCardLikesCount();
 
     return this._element;
   }

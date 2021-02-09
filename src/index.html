@@ -139,16 +139,19 @@
 </div>
 <template id="gallery-card">
   <li class="gallery__grid-item">
-    <figure class="gallery__card">
-      <img src="#" alt="#" class="gallery__card-image">
-      <button class="gallery__card-delete" type="button" aria-label="Удалить фотографию"></button>
-      <figcaption class="gallery__card-caption">
-        <h2 class="gallery__card-name"></h2>
-        <button
-          class="gallery__card-like"
-          type="button"
-          aria-label="Поставить отметку нравится для фотографии"
-        ></button>
+    <figure class="card">
+      <img src="#" alt="#" class="card__image">
+      <button class="card__delete" type="button" aria-label="Удалить фотографию"></button>
+      <figcaption class="card__caption">
+        <h2 class="card__name"></h2>
+        <div class="card__likes">
+          <button
+            class="card__like"
+            type="button"
+            aria-label="Поставить отметку нравится для фотографии"
+          ></button>
+          <p class="card__likes-count"></p>
+        </div>
       </figcaption>
     </figure>
   </li>
