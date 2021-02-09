@@ -9,8 +9,8 @@
   <meta property="og:type" content="profile">
   <meta property="og:title" content="Жак-Ив Кусто">
   <meta property="og:description" content="Исследователь океана">
-  <meta property="og:image:secure_url" content="<%= require('./images/avatar.jpg') %>">
-  <meta property="og:image" content="<%= require('./images/avatar.jpg') %>">
+  <meta property="og:image:secure_url" content="<%= require('./images/favicon/favicon-32x32.png') %>">
+  <meta property="og:image" content="<%= require('./images/favicon/favicon-32x32.png') %>">
   <meta property="og:image:width" content="240">
   <meta property="og:image:height" content="240">
   <meta property="og:image:type" content="image/jpg">
@@ -33,15 +33,11 @@
   <main class="content page__section page__content">
     <section class="profile page__profile">
       <div class="profile__user">
-        <img src="<%=require('./images/avatar.jpg')%>" alt="фото пользователя Жак-Ив Кусто" class="profile__avatar">
+        <img src="" alt="" class="profile__avatar">
         <div class="profile__info">
-          <h1 class="profile__name">
-            Жак-Ив Кусто
-          </h1>
+          <h1 class="profile__name"></h1>
           <button type="button" class="profile__edit" aria-label="Редактировать профиль"></button>
-          <p class="profile__job">
-            Исследователь океана
-          </p>
+          <p class="profile__about"></p>
         </div>
       </div>
       <button type="button" class="profile__add" aria-label="Добавить изображение"></button>
@@ -73,18 +69,18 @@
         >
         <span id="name-error" class="edit-form__error"></span>
       </label>
-      <label for="job" class="edit-form__field">
+      <label for="about" class="edit-form__field">
         <input
-          id="job"
+          id="about"
           type="text"
-          name="job"
-          class="edit-form__input profile-popup__input profile-popup__input_type_job"
+          name="about"
+          class="edit-form__input profile-popup__input profile-popup__input_type_popup"
           required
           minlength="2"
           maxlength="200"
-          aria-describedby="job-error"
+          aria-describedby="about-error"
         >
-        <span id="job-error" class="edit-form__error"></span>
+        <span id="about-error" class="edit-form__error"></span>
       </label>
       <button class="edit-form__submit" type="submit">
         Сохранить
