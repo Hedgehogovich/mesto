@@ -1,6 +1,6 @@
 import Popup from '~src/components/Popup.js';
 
-export default class PopupWithImage extends Popup {
+export default class PicturePopup extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
 
