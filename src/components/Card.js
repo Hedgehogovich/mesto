@@ -1,16 +1,19 @@
 export default class Card {
-  constructor(cardData, template, handleCardClick) {
+  constructor({cardData, template, handleCardClick, beforeDeleteHandle}) {
     this._cardData = cardData;
     this._template = template;
     this._handleCardClick = handleCardClick;
+    this._beforeDeleteHandle = beforeDeleteHandle;
   }
 
   _onLikeButtonClick({target}) {
     target.classList.toggle('card__like_active');
   }
 
-  _onDeleteButtonClick({target}) {
-    target.closest('.gallery__grid-item').remove();
+  _onDeleteButtonClick() {
+    this._beforeDeleteHandle(() => {
+      this._element.remove();
+    });
   }
 
   _setCardName() {
@@ -27,7 +30,7 @@ export default class Card {
       .addEventListener('click', this._onLikeButtonClick);
     this._element
       .querySelector('.card__delete')
-      .addEventListener('click', this._onDeleteButtonClick);
+      .addEventListener('click', this._onDeleteButtonClick.bind(this));
   }
 
   _setCardImage() {
