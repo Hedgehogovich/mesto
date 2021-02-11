@@ -31,18 +31,21 @@ const cardTemplate = document.querySelector('#gallery-card').content;
 const zoomPreviewPopup = new PicturePopup('.zoom-preview');
 zoomPreviewPopup.setEventListeners();
 
+const cardRemovePopup = new PopupWithForm('.delete-popup');
+cardRemovePopup.setEventListeners();
+
 function beforeCardDeleteHandle(cardId, cardDeleteCallback) {
-  const cardRemovePopup = new PopupWithForm('.delete-popup', () => {
+  cardRemovePopup.setSubmitHandler(() => {
     api.removeCard(cardId)
       .then(isOk => {
         if (isOk) {
           cardDeleteCallback();
           cardRemovePopup.close();
+          cardRemovePopup.setSubmitHandler(null);
         }
       })
       .catch(console.error);
   });
-  cardRemovePopup.setEventListeners();
   cardRemovePopup.open();
 }
 
@@ -97,7 +100,7 @@ avatarEditPopup.setEventListeners();
 const newPlacePopup = new PopupWithForm('.place-popup', cardData => {
   api.addCard(cardData)
     .then(createdCardData => {
-      galleryGrid.addItem(createCard({
+      galleryGrid.prependItem(createCard({
         cardData: createdCardData,
         currentUserId: userInfo.getUserInfo()._id
       }));
@@ -140,7 +143,7 @@ function getCards() {
       const cardsCount = cards.length;
 
       for (let i = 0; i < cardsCount; i++) {
-        galleryGrid.addItem(createCard({
+        galleryGrid.appendItem(createCard({
           cardData: cards[i],
           currentUserId: currentUser._id
         }));
@@ -150,7 +153,9 @@ function getCards() {
 }
 
 function initializeApp() {
-  return initializeUserProfile().then(getCards);
+  return initializeUserProfile()
+    .then(getCards)
+    .catch(console.error);
 }
 
 editProfileButton.addEventListener('click', onProfileEditButtonClick);
