@@ -15,6 +15,7 @@ import Section from '~src/components/Section.js';
 import PopupWithImage from '~src/components/PopupWithImage.js';
 import PopupWithForm from '~src/components/PopupWithForm.js';
 import UserInfo from '~src/components/UserInfo.js';
+import CardRemovingPopup from '~src/components/CardRemovingPopup';
 
 const api = new Api();
 
@@ -27,6 +28,9 @@ const cardTemplate = document.querySelector('#gallery-card').content;
 
 const zoomPreviewPopup = new PopupWithImage('.zoom-preview');
 zoomPreviewPopup.setEventListeners();
+
+const cardRemovingPopup = new CardRemovingPopup('.delete-popup');
+cardRemovingPopup.setEventListeners();
 
 const newPlacePopup = new PopupWithForm('.place-popup', cardData => {
   api.addCard(cardData).then(createdCardData => {
@@ -51,8 +55,13 @@ const userInfo = new UserInfo({
   avatarSelector: '.profile__avatar'
 });
 
-function createCard(item) {
-  return new Card(item, cardTemplate, zoomPreviewPopup.open.bind(zoomPreviewPopup)).getElement();
+function createCard(cardData) {
+  return new Card({
+    cardData,
+    template: cardTemplate,
+    handleCardClick: zoomPreviewPopup.open.bind(zoomPreviewPopup),
+    beforeDeleteHandle: cardRemovingPopup.open.bind(cardRemovingPopup),
+  }).getElement();
 }
 
 function onProfileEditButtonClick() {
