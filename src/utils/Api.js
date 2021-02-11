@@ -93,4 +93,12 @@ export default class Api {
       method: 'DELETE',
     }).then(this._getJsonFromResponse);
   }
+
+  updateAvatar(avatar) {
+    return this._makeRequest({
+      action: `/users/me/avatar`,
+      method: 'PATCH',
+      data: {avatar}
+    }).then(this._getJsonFromResponse);
+  }
 }

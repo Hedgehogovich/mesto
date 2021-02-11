@@ -12,6 +12,9 @@ const editProfileForm = document.querySelector('.profile-popup__form');
 const addPlaceButton = document.querySelector('.profile__add');
 const newPlaceForm = document.querySelector('.place-popup__form');
 
+const avatarEditButton = document.querySelector('.profile__avatar-overlay');
+const avatarEditForm = document.querySelector('.avatar-popup__form');
+
 const escapeButtonKey = 'Escape';
 
 export {
@@ -20,5 +23,7 @@ export {
   editProfileForm,
   addPlaceButton,
   newPlaceForm,
+  avatarEditForm,
+  avatarEditButton,
   escapeButtonKey
 };

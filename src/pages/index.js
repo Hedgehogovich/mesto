@@ -5,6 +5,8 @@ import {
   editProfileButton,
   editProfileForm,
   newPlaceForm,
+  avatarEditForm,
+  avatarEditButton,
   validationConfig
 } from '~src/utils/constants';
 import Api from '~src/utils/Api';
@@ -23,6 +25,7 @@ const galleryGrid = new Section({renderer: createCard}, '.gallery__grid');
 
 const editProfileValidation = new FormValidator(validationConfig, editProfileForm);
 const newPlaceValidation = new FormValidator(validationConfig, newPlaceForm);
+const avatarEditValidation = new FormValidator(validationConfig, avatarEditForm);
 
 const cardTemplate = document.querySelector('#gallery-card').content;
 
@@ -52,10 +55,18 @@ const editProfilePopup = new PopupWithForm('.profile-popup', profileData => {
 });
 editProfilePopup.setEventListeners();
 
+const avatarEditPopup = new PopupWithForm('.avatar-popup', ({avatar}) => {
+  api.updateAvatar(avatar).then(updatedUserData => {
+    userInfo.setUserInfo(updatedUserData);
+    avatarEditPopup.close();
+  });
+});
+avatarEditPopup.setEventListeners();
+
 const userInfo = new UserInfo({
   nameSelector: '.profile__name',
   aboutSelector: '.profile__about',
-  avatarSelector: '.profile__avatar'
+  avatarSelector: '.profile__avatar-image'
 });
 
 function beforeCardDeleteHandle(cardId, cardDeleteCallback) {
@@ -98,6 +109,11 @@ function onNewPlaceButtonClick() {
   newPlacePopup.open();
 }
 
+function onAvatarEditClick() {
+  avatarEditValidation.resetForm();
+  avatarEditPopup.open();
+}
+
 function initializeUserProfile() {
   return api
     .getAuthorizedUserInfo()
@@ -125,7 +141,9 @@ function initializeApp() {
 
 editProfileButton.addEventListener('click', onProfileEditButtonClick);
 addPlaceButton.addEventListener('click', onNewPlaceButtonClick);
+avatarEditButton.addEventListener('click', onAvatarEditClick);
 
 initializeApp();
 editProfileValidation.enableValidation();
 newPlaceValidation.enableValidation();
+avatarEditValidation.enableValidation();
