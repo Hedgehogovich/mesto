@@ -36,7 +36,7 @@ const newPlacePopup = new PopupWithForm('.place-popup', cardData => {
   api.addCard(cardData).then(createdCardData => {
     galleryGrid.addItem(createCard({
       cardData: createdCardData,
-      isCardBelongsToCurrentUser: true
+      currentUserId: userInfo.getUserInfo()._id
     }));
     newPlacePopup.close();
   });
@@ -68,12 +68,23 @@ function beforeCardDeleteHandle(cardId, cardDeleteCallback) {
   });
 }
 
-function createCard({cardData, isCardBelongsToCurrentUser}) {
+function likeCard(cardId, likeCallback) {
+  return api.likeCard(cardId).then(likeCallback);
+}
+
+function removeLikeFromCard(cardId, removeLikeCallback) {
+  return api.removeLikeFromCard(cardId).then(removeLikeCallback);
+}
+
+function createCard({cardData, currentUserId}) {
   return new Card({
     cardData,
     template: cardTemplate,
+    currentUserId,
     handleCardClick: zoomPreviewPopup.open.bind(zoomPreviewPopup),
-    beforeDeleteHandle: isCardBelongsToCurrentUser ? beforeCardDeleteHandle : null,
+    beforeDeleteHandle: beforeCardDeleteHandle,
+    likeHandle: likeCard,
+    removeLikeHandle: removeLikeFromCard,
   }).getElement();
 }
 
@@ -100,11 +111,9 @@ function getCards() {
       const currentUser = userInfo.getUserInfo();
 
       cards.reverse().forEach(card => {
-        const isCardBelongsToCurrentUser = card.owner._id === currentUser._id;
-
         galleryGrid.addItem(createCard({
           cardData: card,
-          isCardBelongsToCurrentUser
+          currentUserId: currentUser._id
         }));
       });
     });
