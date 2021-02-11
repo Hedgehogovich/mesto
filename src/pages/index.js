@@ -137,8 +137,9 @@ function getCards() {
   return api.getCards()
     .then(cards => {
       const currentUser = userInfo.getUserInfo();
+      const cardsCount = cards.length;
 
-      for (let i = cards.length - 1; i >= 0; i--) {
+      for (let i = 0; i < cardsCount; i++) {
         galleryGrid.addItem(createCard({
           cardData: cards[i],
           currentUserId: currentUser._id

@@ -6,7 +6,7 @@
   height: 100%;
   width: 100%;
 
-  background: #000 url('~src/images/icons/edit.svg') no-repeat center / 26px;
+  background: rgba(0, 0, 0, .8) url('~src/images/icons/edit.svg') no-repeat center / 26px;
   opacity: 0;
 
   transition: opacity .1s linear;
@@ -15,5 +15,5 @@
 }
 
 .profile__avatar-overlay:hover {
-  opacity: .8;
+  opacity: 1;
 }
