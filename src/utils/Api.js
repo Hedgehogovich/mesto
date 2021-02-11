@@ -79,4 +79,18 @@ export default class Api {
       method: 'DELETE',
     }).then(this._getOkStatusFromResponse);
   }
+
+  likeCard(cardId) {
+    return this._makeRequest({
+      action: `/cards/likes/${cardId}`,
+      method: 'PUT',
+    }).then(this._getJsonFromResponse);
+  }
+
+  removeLikeFromCard(cardId) {
+    return this._makeRequest({
+      action: `/cards/likes/${cardId}`,
+      method: 'DELETE',
+    }).then(this._getJsonFromResponse);
+  }
 }
