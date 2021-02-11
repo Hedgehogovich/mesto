@@ -16,7 +16,3 @@
 * Функции
 * ES6-синтаксис
 * Сборка проекта с помощью Webpack
-
-Ссылки на рабочий проект:
-- [GitHub Pages](https://hedgehogovich.github.io/mesto/)
-- [Amazon Web Services](https://main.d3adtqr7pxt8t4.amplifyapp.com)
