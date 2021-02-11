@@ -33,7 +33,10 @@
   <main class="content page__section page__content">
     <section class="profile page__profile">
       <div class="profile__user">
-        <img src="" alt="" class="profile__avatar">
+        <div class="profile__avatar">
+          <img src="" alt="" class="profile__avatar-image">
+          <div class="profile__avatar-overlay"></div>
+        </div>
         <div class="profile__info">
           <h1 class="profile__name"></h1>
           <button type="button" class="profile__edit" aria-label="Редактировать профиль"></button>
@@ -120,6 +123,31 @@
           aria-describedby="picture-error"
         >
         <span id="picture-error" class="edit-form__error"></span>
+      </label>
+      <button class="edit-form__submit" type="submit">
+        Сохранить
+      </button>
+    </form>
+    <button type="button" class="popup__close" aria-label="Закрыть всплывающее окно"></button>
+  </div>
+</div>
+<div class="popup popup_background_dark avatar-popup">
+  <div class="popup__container popup__container_form">
+    <form name="avatar" class="edit-form avatar-popup__form" novalidate>
+      <h2 class="edit-form__title">
+        Новое место
+      </h2>
+      <label for="avatar" class="edit-form__field">
+        <input
+          id="avatar"
+          type="url"
+          name="avatar"
+          placeholder="Ссылка на аватар"
+          class="edit-form__input avatar-popup__input"
+          required
+          aria-describedby="avatar-error"
+        >
+        <span id="avatar-error" class="edit-form__error"></span>
       </label>
       <button class="edit-form__submit" type="submit">
         Сохранить
