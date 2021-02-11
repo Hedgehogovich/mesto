@@ -34,7 +34,7 @@ cardRemovingPopup.setEventListeners();
 
 const newPlacePopup = new PopupWithForm('.place-popup', cardData => {
   api.addCard(cardData).then(createdCardData => {
-    galleryGrid.addItem(createCard(createdCardData));
+    galleryGrid.addItem(createCard(createdCardData, true));
     newPlacePopup.close();
   });
 });
@@ -55,12 +55,22 @@ const userInfo = new UserInfo({
   avatarSelector: '.profile__avatar'
 });
 
-function createCard(cardData) {
+function beforeCardDeleteHandle(cardId, cardDeleteCallback) {
+  cardRemovingPopup.open(() => {
+    api.removeCard(cardId).then(isOk => {
+      if (isOk) {
+        cardDeleteCallback();
+      }
+    });
+  });
+}
+
+function createCard(cardData, isCardBelongsToCurrentUser) {
   return new Card({
     cardData,
     template: cardTemplate,
     handleCardClick: zoomPreviewPopup.open.bind(zoomPreviewPopup),
-    beforeDeleteHandle: cardRemovingPopup.open.bind(cardRemovingPopup),
+    beforeDeleteHandle: isCardBelongsToCurrentUser ? beforeCardDeleteHandle : null,
   }).getElement();
 }
 
@@ -75,19 +85,31 @@ function onNewPlaceButtonClick() {
 }
 
 function initializeUserProfile() {
-  api.getAuthorizedUserInfo()
+  return api
+    .getAuthorizedUserInfo()
     .then(authorizedUserInfo => userInfo.setUserInfo(authorizedUserInfo));
 }
 
 function getCards() {
   api.getCards()
-    .then(cards => cards.reverse().forEach(card => galleryGrid.addItem(createCard(card))));
+    .then(cards => {
+      const currentUser = userInfo.getUserInfo();
+
+      cards.reverse().forEach(card => {
+        const isCardBelongsToCurrentUser = card.owner._id === currentUser._id;
+
+        galleryGrid.addItem(createCard(card, isCardBelongsToCurrentUser));
+      });
+    });
+}
+
+function initializeApp() {
+  initializeUserProfile().then(getCards);
 }
 
 editProfileButton.addEventListener('click', onProfileEditButtonClick);
 addPlaceButton.addEventListener('click', onNewPlaceButtonClick);
 
-initializeUserProfile();
-getCards();
+initializeApp();
 editProfileValidation.enableValidation();
 newPlaceValidation.enableValidation();

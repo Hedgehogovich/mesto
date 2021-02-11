@@ -41,6 +41,10 @@ export default class Api {
     return response.json();
   }
 
+  _getOkStatusFromResponse(response) {
+    return response.ok;
+  }
+
   getAuthorizedUserInfo() {
     return this._makeRequest({
       action: '/users/me'
@@ -67,5 +71,12 @@ export default class Api {
       method: 'POST',
       data: {name, link},
     }).then(this._getJsonFromResponse);
+  }
+
+  removeCard(cardId) {
+    return this._makeRequest({
+      action: `/cards/${cardId}`,
+      method: 'DELETE',
+    }).then(this._getOkStatusFromResponse);
   }
 }
