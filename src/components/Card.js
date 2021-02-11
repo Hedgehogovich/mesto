@@ -4,16 +4,21 @@ export default class Card {
     this._template = template;
     this._handleCardClick = handleCardClick;
     this._beforeDeleteHandle = beforeDeleteHandle;
+    this._deleteSelf = this._deleteSelf.bind(this);
+    this._onDeleteButtonClick = this._onDeleteButtonClick.bind(this);
   }
 
   _onLikeButtonClick({target}) {
     target.classList.toggle('card__like_active');
   }
 
+  _deleteSelf() {
+    this._element.remove();
+    this._element = null;
+  }
+
   _onDeleteButtonClick() {
-    this._beforeDeleteHandle(() => {
-      this._element.remove();
-    });
+    this._beforeDeleteHandle(this._deleteSelf);
   }
 
   _setCardName() {
@@ -30,7 +35,7 @@ export default class Card {
       .addEventListener('click', this._onLikeButtonClick);
     this._element
       .querySelector('.card__delete')
-      .addEventListener('click', this._onDeleteButtonClick.bind(this));
+      .addEventListener('click', this._onDeleteButtonClick);
   }
 
   _setCardImage() {
