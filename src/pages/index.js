@@ -34,7 +34,10 @@ cardRemovingPopup.setEventListeners();
 
 const newPlacePopup = new PopupWithForm('.place-popup', cardData => {
   api.addCard(cardData).then(createdCardData => {
-    galleryGrid.addItem(createCard(createdCardData, true));
+    galleryGrid.addItem(createCard({
+      cardData: createdCardData,
+      isCardBelongsToCurrentUser: true
+    }));
     newPlacePopup.close();
   });
 });
@@ -65,7 +68,7 @@ function beforeCardDeleteHandle(cardId, cardDeleteCallback) {
   });
 }
 
-function createCard(cardData, isCardBelongsToCurrentUser) {
+function createCard({cardData, isCardBelongsToCurrentUser}) {
   return new Card({
     cardData,
     template: cardTemplate,
@@ -91,20 +94,24 @@ function initializeUserProfile() {
 }
 
 function getCards() {
-  api.getCards()
+  return api
+    .getCards()
     .then(cards => {
       const currentUser = userInfo.getUserInfo();
 
       cards.reverse().forEach(card => {
         const isCardBelongsToCurrentUser = card.owner._id === currentUser._id;
 
-        galleryGrid.addItem(createCard(card, isCardBelongsToCurrentUser));
+        galleryGrid.addItem(createCard({
+          cardData: card,
+          isCardBelongsToCurrentUser
+        }));
       });
     });
 }
 
 function initializeApp() {
-  initializeUserProfile().then(getCards);
+  return initializeUserProfile().then(getCards);
 }
 
 editProfileButton.addEventListener('click', onProfileEditButtonClick);
