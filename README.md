@@ -16,3 +16,5 @@
 * Функции
 * ES6-синтаксис
 * Сборка проекта с помощью Webpack
+
+[Ссылка на GitHub Pages](https://hedgehogovich.github.io/mesto/)
