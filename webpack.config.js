@@ -41,7 +41,14 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      title: 'Mesto'
+      title: 'Mesto',
+      favicon: path.resolve(__dirname, 'src/favicon.ico'),
+      meta: {
+        author: 'Юрий Чачило',
+        description: 'проектная работа к курсу номер 4',
+        keywords: 'HTML,CSS,JS',
+        viewport: 'width=device-width, initial-scale=1',
+      },
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
