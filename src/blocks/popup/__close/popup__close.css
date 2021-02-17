@@ -6,7 +6,7 @@
   top: -40px;
   right: -40px;
 
-  background: transparent url('~src/images/icons/close.svg') no-repeat center / contain;
+  background: transparent url('@/images/icons/close.svg') no-repeat center / contain;
   border: none;
   cursor: pointer;
   transform: rotate(45deg);

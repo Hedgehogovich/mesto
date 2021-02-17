@@ -1,4 +1,4 @@
-import '~src/pages/index.css';
+import '@/pages/index.css';
 
 import {
   addPlaceButton,
@@ -8,15 +8,15 @@ import {
   avatarEditForm,
   avatarEditButton,
   validationConfig
-} from '~src/utils/constants';
-import Api from '~src/components/Api';
+} from '@/utils/constants';
+import Api from '@/components/Api';
 
-import FormValidator from '~src/components/FormValidator.js';
-import Card from '~src/components/Card.js';
-import Section from '~src/components/Section.js';
-import PicturePopup from '~src/components/PicturePopup.js';
-import PopupWithForm from '~src/components/PopupWithForm.js';
-import UserInfo from '~src/components/UserInfo.js';
+import FormValidator from '@/components/FormValidator.js';
+import Card from '@/components/Card.js';
+import Section from '@/components/Section.js';
+import PicturePopup from '@/components/PicturePopup.js';
+import PopupWithForm from '@/components/PopupWithForm.js';
+import UserInfo from '@/components/UserInfo.js';
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-20',

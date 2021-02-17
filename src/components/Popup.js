@@ -1,4 +1,4 @@
-import {escapeButtonKey} from '~src/utils/constants';
+import {escapeButtonKey} from '@/utils/constants';
 
 export default class Popup {
   constructor(popupSelector) {
