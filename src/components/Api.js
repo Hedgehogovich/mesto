@@ -61,12 +61,11 @@ export default class Api {
     }).then(this._getJsonFromResponse);
   }
 
-
   _makeRequest({
-                 action,
-                 method = 'GET',
-                 data = null,
-               }) {
+    action,
+    method = 'GET',
+    data = null,
+  }) {
     if (!action) {
       return Promise.reject('Не передано адреса запроса');
     }
